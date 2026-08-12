@@ -1,6 +1,9 @@
 "use client";
 
+import { useRef } from "react";
+import { motion, useScroll, useSpring } from "framer-motion";
 import { Reveal } from "@/components/Reveal";
+import { Flame } from "@/components/Flame";
 import { HUE_DOT, HUE_TEXT, hue } from "@/lib/palette";
 
 const CIVILIZATION_MARKS = [
@@ -21,6 +24,13 @@ const EVOLUTION = [
 ];
 
 export function IndiaCivilization() {
+  const timelineRef = useRef<HTMLDivElement | null>(null);
+  const { scrollYProgress } = useScroll({
+    target: timelineRef,
+    offset: ["start 0.8", "end 0.6"],
+  });
+  const drawProgress = useSpring(scrollYProgress, { stiffness: 90, damping: 24 });
+
   return (
     <section id="india" className="relative mesh-charcoal py-28 sm:py-40">
       <div className="mx-auto max-w-6xl px-6">
@@ -66,9 +76,14 @@ export function IndiaCivilization() {
           </Reveal>
         </div>
 
-        <div className="relative mt-28">
+        <div ref={timelineRef} className="relative mt-28">
           <div
-            className="absolute left-4 top-2 bottom-2 w-px bg-gradient-to-b from-saffron via-rani to-peacock sm:left-1/2"
+            className="absolute left-4 top-2 bottom-2 w-px bg-ivory/10 sm:left-1/2"
+            aria-hidden="true"
+          />
+          <motion.div
+            className="absolute left-4 top-2 w-px origin-top bg-gradient-to-b from-saffron via-rani to-peacock sm:left-1/2"
+            style={{ scaleY: drawProgress, height: "calc(100% - 1rem)" }}
             aria-hidden="true"
           />
           <div className="space-y-10">
@@ -92,7 +107,12 @@ export function IndiaCivilization() {
                   />
                   <div>
                     {step.era && (
-                      <span className="font-mono-label text-[10px] uppercase tracking-[0.3em] text-copper">
+                      <span
+                        className={`inline-flex items-center gap-1 font-mono-label text-[10px] uppercase tracking-[0.3em] text-copper ${
+                          i % 2 === 1 ? "" : "sm:flex-row-reverse"
+                        }`}
+                      >
+                        {i === 0 && <Flame className="-mb-2" />}
                         {step.era}
                       </span>
                     )}

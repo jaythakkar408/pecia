@@ -188,3 +188,68 @@ body {
     animation: none;
   }
 }
+
+@keyframes flame-flicker {
+  0%, 100% { transform: scaleY(1) scaleX(1) skewX(0deg); }
+  25% { transform: scaleY(1.06) scaleX(0.96) skewX(-2deg); }
+  50% { transform: scaleY(0.96) scaleX(1.04) skewX(1deg); }
+  75% { transform: scaleY(1.03) scaleX(0.98) skewX(-1deg); }
+}
+
+.animate-flame-flicker {
+  animation: flame-flicker 1.8s ease-in-out infinite;
+  transform-origin: bottom center;
+}
+
+@keyframes ember-rise-1 {
+  0% { transform: translate(-50%, 0) scale(1); opacity: 0.9; }
+  100% { transform: translate(-140%, -26px) scale(0.3); opacity: 0; }
+}
+
+@keyframes ember-rise-2 {
+  0% { transform: translate(-50%, 0) scale(1); opacity: 0.9; }
+  100% { transform: translate(40%, -32px) scale(0.2); opacity: 0; }
+}
+
+.animate-ember-1 {
+  animation: ember-rise-1 2.2s ease-out infinite;
+}
+
+.animate-ember-2 {
+  animation: ember-rise-2 2.6s ease-out 0.6s infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-flame-flicker,
+  .animate-ember-1,
+  .animate-ember-2 {
+    animation: none;
+  }
+}
+
+@keyframes steam-drift {
+  0% { transform: translateY(0) scaleX(1); opacity: 0; }
+  15% { opacity: 0.5; }
+  100% { transform: translateY(-90px) scaleX(1.6); opacity: 0; }
+}
+
+.animate-steam-1 {
+  animation: steam-drift 6s ease-in-out infinite;
+}
+
+.animate-steam-2 {
+  animation: steam-drift 7s ease-in-out 1.5s infinite;
+}
+
+.animate-steam-3 {
+  animation: steam-drift 5.5s ease-in-out 3s infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-steam-1,
+  .animate-steam-2,
+  .animate-steam-3 {
+    animation: none;
+    opacity: 0;
+  }
+}

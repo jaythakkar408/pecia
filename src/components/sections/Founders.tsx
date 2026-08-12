@@ -1,6 +1,7 @@
 "use client";
 
 import { Reveal } from "@/components/Reveal";
+import { FounderMark } from "@/components/FounderMark";
 
 const FOUNDERS = [
   {
@@ -14,6 +15,8 @@ const FOUNDERS = [
     title_color: "text-peacock-soft",
     name_color: "text-ivory",
     quote_border: "border-peacock/50",
+    primary: "#0e8a72",
+    secondary: "#2bbf9e",
   },
   {
     name: "Yukta Patel",
@@ -25,6 +28,8 @@ const FOUNDERS = [
     title_color: "text-rani-soft",
     name_color: "text-ivory",
     quote_border: "border-rani/50",
+    primary: "#d6236e",
+    secondary: "#f0579c",
   },
   {
     name: "Dhruv Thakkar",
@@ -36,6 +41,8 @@ const FOUNDERS = [
     title_color: "text-turmeric",
     name_color: "text-ivory",
     quote_border: "border-turmeric/50",
+    primary: "#f0b429",
+    secondary: "#f4881d",
   },
 ];
 
@@ -58,7 +65,12 @@ export function Founders() {
           {FOUNDERS.map((founder, i) => (
             <Reveal key={founder.name} delay={i * 0.08}>
               <div className={`flex h-full flex-col rounded-2xl border-t-4 border-ivory/10 bg-charcoal-soft/60 p-8 ${founder.border}`}>
-                <span className={`font-mono-label text-[10px] uppercase tracking-[0.25em] ${founder.title_color}`}>
+                <FounderMark
+                  primary={founder.primary}
+                  secondary={founder.secondary}
+                  initial={founder.name[0]}
+                />
+                <span className={`mt-5 font-mono-label text-[10px] uppercase tracking-[0.25em] ${founder.title_color}`}>
                   {founder.title}
                 </span>
                 <h3 className="mt-3 font-display text-2xl font-bold text-ivory">

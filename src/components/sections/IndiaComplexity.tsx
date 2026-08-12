@@ -3,11 +3,12 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Reveal } from "@/components/Reveal";
+import { IndiaMap, type MapCity } from "@/components/IndiaMap";
 
 type Region = {
   id: string;
   name: string;
-  cities: string;
+  cities: MapCity[];
   behavior: string;
   format: string;
   price: string;
@@ -26,7 +27,12 @@ const REGIONS: Region[] = [
     border: "border-saffron",
     bg: "bg-saffron/10",
     text: "text-saffron-soft",
-    cities: "Delhi NCR, Chandigarh, Lucknow, Jaipur",
+    cities: [
+      { name: "Delhi NCR", x: 42, y: 22 },
+      { name: "Chandigarh", x: 38, y: 12 },
+      { name: "Jaipur", x: 33, y: 30 },
+      { name: "Lucknow", x: 54, y: 28 },
+    ],
     behavior: "High dine-out frequency, brand-conscious, celebration-led spending.",
     format: "Large-format dine-in and premium QSR do well.",
     price: "Wide price ladder — value and premium both scale.",
@@ -39,7 +45,12 @@ const REGIONS: Region[] = [
     border: "border-spice",
     bg: "bg-spice/10",
     text: "text-spice-soft",
-    cities: "Mumbai, Pune, Ahmedabad, Surat",
+    cities: [
+      { name: "Mumbai", x: 22, y: 62 },
+      { name: "Pune", x: 27, y: 68 },
+      { name: "Ahmedabad", x: 20, y: 46 },
+      { name: "Surat", x: 21, y: 53 },
+    ],
     behavior: "Fast-paced, delivery-first, high competitive density.",
     format: "Cloud kitchens and compact high-footfall formats win.",
     price: "High real-estate cost forces disciplined unit economics.",
@@ -52,7 +63,12 @@ const REGIONS: Region[] = [
     border: "border-peacock",
     bg: "bg-peacock/10",
     text: "text-peacock-soft",
-    cities: "Bengaluru, Chennai, Hyderabad, Kochi",
+    cities: [
+      { name: "Bengaluru", x: 41, y: 96 },
+      { name: "Chennai", x: 56, y: 99 },
+      { name: "Hyderabad", x: 45, y: 82 },
+      { name: "Kochi", x: 34, y: 114 },
+    ],
     behavior: "High digital adoption, strong regional cuisine loyalty.",
     format: "Café culture and multi-cuisine QSR expand quickly.",
     price: "Value-conscious but willing to pay for consistency.",
@@ -65,7 +81,12 @@ const REGIONS: Region[] = [
     border: "border-rani",
     bg: "bg-rani/10",
     text: "text-rani-soft",
-    cities: "Kolkata, Bhubaneswar, Guwahati, Patna",
+    cities: [
+      { name: "Kolkata", x: 70, y: 58 },
+      { name: "Bhubaneswar", x: 63, y: 70 },
+      { name: "Guwahati", x: 86, y: 44 },
+      { name: "Patna", x: 62, y: 36 },
+    ],
     behavior: "Strong local-brand loyalty, price-sensitive entry, community dining.",
     format: "Emerging QSR category with real estate advantages.",
     price: "Lower average ticket size, high volume potential.",
@@ -78,7 +99,11 @@ const REGIONS: Region[] = [
     border: "border-turmeric",
     bg: "bg-turmeric/10",
     text: "text-turmeric",
-    cities: "Indore, Nagpur, Bhopal, 100+ emerging towns",
+    cities: [
+      { name: "Indore", x: 34, y: 54 },
+      { name: "Nagpur", x: 44, y: 64 },
+      { name: "Bhopal", x: 37, y: 50 },
+    ],
     behavior: "Fastest-growing consumption class in the country.",
     format: "First-mover national brands win disproportionate share.",
     price: "Lower cost base, strong margin potential at scale.",
@@ -110,29 +135,25 @@ export function IndiaComplexity() {
           </p>
         </Reveal>
 
-        <div className="mt-16 grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)]">
+        <div className="mt-16 grid gap-8 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:items-center">
           <Reveal delay={0.15}>
-            <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-2">
+            <IndiaMap
+              regions={REGIONS}
+              active={active.id}
+              onSelect={(id) => setActive(REGIONS.find((r) => r.id === id) ?? REGIONS[0])}
+            />
+            <div className="mt-6 flex flex-wrap justify-center gap-2">
               {REGIONS.map((region) => (
                 <button
                   key={region.id}
                   onClick={() => setActive(region)}
-                  className={`rounded-2xl border px-5 py-6 text-left transition ${
+                  className={`rounded-full border px-3.5 py-1.5 font-mono-label text-[10px] uppercase tracking-[0.15em] transition ${
                     active.id === region.id
-                      ? `${region.border} ${region.bg}`
-                      : "border-ivory/10 hover:border-ivory/30"
+                      ? `${region.border} ${region.bg} ${region.text}`
+                      : "border-ivory/15 text-ivory-dim hover:border-ivory/30"
                   }`}
                 >
-                  <span
-                    className={`font-display text-lg font-bold sm:text-xl ${
-                      active.id === region.id ? region.text : "text-ivory"
-                    }`}
-                  >
-                    {region.name}
-                  </span>
-                  <span className="mt-2 block text-xs text-ivory-dim">
-                    {region.cities}
-                  </span>
+                  {region.name}
                 </button>
               ))}
             </div>
@@ -151,6 +172,9 @@ export function IndiaComplexity() {
                 <h3 className={`font-display text-2xl font-bold ${active.text}`}>
                   {active.name}
                 </h3>
+                <p className="mt-1 text-xs text-ivory-dim">
+                  {active.cities.map((c) => c.name).join(", ")}
+                </p>
                 <dl className="mt-6 space-y-5">
                   <div>
                     <dt className="font-mono-label text-[10px] uppercase tracking-[0.25em] text-copper">

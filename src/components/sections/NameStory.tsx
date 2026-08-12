@@ -1,6 +1,7 @@
 "use client";
 
 import { Reveal } from "@/components/Reveal";
+import { Steam } from "@/components/Steam";
 import { HUE_BORDER, HUE_TEXT, hue } from "@/lib/palette";
 
 const CHAIN = [
@@ -18,9 +19,12 @@ export function NameStory() {
           </span>
         </Reveal>
         <Reveal delay={0.05}>
-          <h2 className="mt-4 font-display text-3xl font-extrabold text-gradient-warm sm:text-5xl">
-            Pecia.
-          </h2>
+          <div className="relative inline-block">
+            <Steam className="-top-16 left-1/2 -translate-x-1/2" />
+            <h2 className="relative mt-4 font-display text-3xl font-extrabold text-gradient-warm sm:text-5xl">
+              Pecia.
+            </h2>
+          </div>
         </Reveal>
 
         <Reveal delay={0.1}>

@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { motion } from "framer-motion";
 import { Reveal } from "@/components/Reveal";
 import { HUE_BG_SOFT, HUE_BORDER, HUE_TEXT, hue } from "@/lib/palette";
 
@@ -53,6 +54,27 @@ export function CapabilityEcosystem() {
 
         <Reveal delay={0.1}>
           <div className="relative mx-auto mt-16 aspect-square w-full max-w-2xl">
+            <div
+              className="absolute inset-[6%] rounded-full opacity-60"
+              style={{
+                background:
+                  "radial-gradient(circle, rgba(240,180,41,0.08) 0%, rgba(240,180,41,0.03) 55%, transparent 75%)",
+              }}
+              aria-hidden="true"
+            />
+            <motion.svg
+              className="absolute inset-0 h-full w-full"
+              viewBox="0 0 100 100"
+              aria-hidden="true"
+              animate={{ rotate: 360 }}
+              transition={{ duration: 120, repeat: Infinity, ease: "linear" }}
+            >
+              <circle cx="50" cy="50" r="46" fill="none" stroke="rgba(240,180,41,0.25)" strokeWidth="0.3" strokeDasharray="0.6 2.4" />
+            </motion.svg>
+            <svg className="absolute inset-0 h-full w-full" viewBox="0 0 100 100" aria-hidden="true">
+              <circle cx="50" cy="50" r="38" fill="none" stroke="rgba(251,238,219,0.08)" strokeWidth="0.3" />
+              <circle cx="50" cy="50" r="16" fill="none" stroke="rgba(251,238,219,0.1)" strokeWidth="0.3" />
+            </svg>
             <svg
               className="absolute inset-0 h-full w-full"
               viewBox="0 0 100 100"

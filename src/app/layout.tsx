@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Unbounded, Manrope, Space_Mono } from "next/font/google";
 import { SoundProvider } from "@/components/SoundProvider";
 import { Nav } from "@/components/Nav";
+import { EmberField } from "@/components/EmberField";
 import "./globals.css";
 
 const unbounded = Unbounded({
@@ -51,6 +52,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     >
       <body className="min-h-full flex flex-col bg-ink text-ivory">
         <div className="grain" aria-hidden="true" />
+        <EmberField />
         <SoundProvider>
           <Nav />
           {children}
