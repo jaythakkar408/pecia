@@ -38,7 +38,7 @@ export function Ecosystem() {
         </Reveal>
 
         <Reveal delay={0.18}>
-          <div className="mx-auto mt-14 inline-flex h-20 w-20 items-center justify-center rounded-full border-2 border-turmeric bg-ink font-display text-sm font-bold text-turmeric-soft shadow-[0_0_40px_rgba(240,180,41,0.3)]">
+          <div className="animate-heartbeat mx-auto mt-14 inline-flex h-20 w-20 items-center justify-center rounded-full border-2 border-turmeric bg-ink font-display text-sm font-bold text-turmeric-soft shadow-[0_0_40px_rgba(240,180,41,0.3)]">
             PECIA
           </div>
         </Reveal>

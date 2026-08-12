@@ -95,7 +95,7 @@ export function CapabilityEcosystem() {
 
             <button
               onClick={() => setActive((a) => (a + 1) % CAPABILITIES.length)}
-              className="absolute left-1/2 top-1/2 flex h-20 w-20 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border-2 border-turmeric bg-ink font-display text-sm font-bold text-turmeric-soft shadow-[0_0_40px_rgba(240,180,41,0.35)] sm:h-24 sm:w-24 sm:text-base"
+              className="animate-heartbeat absolute left-1/2 top-1/2 flex h-20 w-20 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border-2 border-turmeric bg-ink font-display text-sm font-bold text-turmeric-soft shadow-[0_0_40px_rgba(240,180,41,0.35)] sm:h-24 sm:w-24 sm:text-base"
             >
               PECIA
             </button>

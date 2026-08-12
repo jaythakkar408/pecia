@@ -253,3 +253,37 @@ body {
     opacity: 0;
   }
 }
+
+/* A double "lub-dub" pulse — used anywhere the brand mark should feel alive. */
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); }
+  14% { transform: scale(1.07); }
+  28% { transform: scale(1); }
+  42% { transform: scale(1.04); }
+  56% { transform: scale(1); }
+}
+
+.animate-heartbeat {
+  animation: heartbeat 1.15s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-heartbeat {
+    animation: none;
+  }
+}
+
+@keyframes ecg-scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+.animate-ecg-scroll {
+  animation: ecg-scroll 7s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-ecg-scroll {
+    animation: none;
+  }
+}

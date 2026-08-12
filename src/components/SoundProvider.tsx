@@ -14,6 +14,7 @@ type SoundContextValue = {
   toggleMuted: () => void;
   pluck: (frequency: number, duration?: number) => void;
   tone: (frequency: number, duration?: number, type?: OscillatorType) => void;
+  heartbeat: () => void;
 };
 
 const SoundContext = createContext<SoundContextValue | null>(null);
@@ -64,6 +65,30 @@ export function SoundProvider({ children }: { children: React.ReactNode }) {
     [tone]
   );
 
+  const heartbeat = useCallback(() => {
+    if (muted) return;
+    const ctx = ensureCtx();
+    if (!ctx) return;
+    if (ctx.state === "suspended") ctx.resume();
+
+    const thump = (delay: number, freq: number, peak: number) => {
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = "sine";
+      osc.frequency.value = freq;
+      const start = ctx.currentTime + delay;
+      gain.gain.setValueAtTime(0, start);
+      gain.gain.linearRampToValueAtTime(peak, start + 0.03);
+      gain.gain.exponentialRampToValueAtTime(0.0001, start + 0.32);
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start(start);
+      osc.stop(start + 0.35);
+    };
+    thump(0, 58, 0.09);
+    thump(0.18, 46, 0.06);
+  }, [muted, ensureCtx]);
+
   const toggleMuted = useCallback(() => {
     setMuted((m) => {
       const next = !m;
@@ -82,7 +107,7 @@ export function SoundProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   return (
-    <SoundContext.Provider value={{ muted, toggleMuted, pluck, tone }}>
+    <SoundContext.Provider value={{ muted, toggleMuted, pluck, tone, heartbeat }}>
       {children}
     </SoundContext.Provider>
   );

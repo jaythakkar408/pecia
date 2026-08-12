@@ -5,11 +5,11 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useSound } from "@/components/SoundProvider";
 import { usePrefersReducedMotion } from "@/lib/useReducedMotion";
 
-const STRING_COUNT = 48;
+const VEIN_COUNT = 44;
 // A warm, north-Indian-classical-leaning pentatonic run across two octaves.
 const SCALE = [220, 246.94, 277.18, 329.63, 369.99, 440, 493.88, 554.37, 659.25, 739.99];
-// Ikat/dhurrie thread colors — each string is a different vivid thread.
-const THREAD_COLORS = [
+// Lifeblood colors — each vein carries a different vivid thread of it.
+const VEIN_COLORS = [
   [244, 136, 29], // saffron
   [214, 35, 110], // rani pink
   [240, 180, 41], // turmeric
@@ -18,32 +18,66 @@ const THREAD_COLORS = [
   [77, 82, 196], // indigo
 ];
 
-type StringState = {
+// One cardiac cycle: a quick "lub" then a softer "dub".
+const BEAT_PERIOD = 1150;
+function heartbeatCurve(msIntoCycle: number) {
+  const t = msIntoCycle / BEAT_PERIOD;
+  const lub = Math.exp(-Math.pow((t - 0.06) * 11, 2));
+  const dub = Math.exp(-Math.pow((t - 0.24) * 14, 2)) * 0.6;
+  return Math.min(1, lub + dub);
+}
+
+type VeinState = {
   offset: number;
   velocity: number;
   lastPluckAt: number;
 };
 
-export function CurtainHero() {
+export function PulseHero() {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const containerRef = useRef<HTMLDivElement | null>(null);
-  const stringsRef = useRef<StringState[]>(
-    Array.from({ length: STRING_COUNT }, () => ({
+  const sectionRef = useRef<HTMLDivElement | null>(null);
+  const veinsRef = useRef<VeinState[]>(
+    Array.from({ length: VEIN_COUNT }, () => ({
       offset: 0,
       velocity: 0,
       lastPluckAt: -1000,
     }))
   );
   const pluckedSetRef = useRef<Set<number>>(new Set());
-  const pointerRef = useRef<{ x: number; y: number; down: boolean } | null>(null);
+  const pointerRef = useRef<{ x: number; y: number } | null>(null);
   const rafRef = useRef<number | null>(null);
-  const { pluck } = useSound();
+  const { pluck, heartbeat } = useSound();
   const reducedMotion = usePrefersReducedMotion();
 
   const [opened, setOpened] = useState(false);
   const [pluckedCount, setPluckedCount] = useState(0);
 
   const handleReveal = useCallback(() => setOpened(true), []);
+
+  // Ambient heartbeat sound — only while this section is on screen.
+  useEffect(() => {
+    const section = sectionRef.current;
+    if (!section) return;
+    let interval: ReturnType<typeof setInterval> | null = null;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          heartbeat();
+          interval = setInterval(heartbeat, BEAT_PERIOD);
+        } else if (interval) {
+          clearInterval(interval);
+          interval = null;
+        }
+      },
+      { threshold: 0.4 }
+    );
+    observer.observe(section);
+    return () => {
+      observer.disconnect();
+      if (interval) clearInterval(interval);
+    };
+  }, [heartbeat]);
 
   useEffect(() => {
     if (reducedMotion) return;
@@ -56,6 +90,7 @@ export function CurtainHero() {
     let width = 0;
     let height = 0;
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const startedAt = performance.now();
 
     const resize = () => {
       width = container.clientWidth;
@@ -69,17 +104,34 @@ export function CurtainHero() {
     resize();
     window.addEventListener("resize", resize);
 
-    const gap = () => width / STRING_COUNT;
+    const gap = () => width / VEIN_COUNT;
+    const sourceX = () => width / 2;
+    const sourceY = () => height - 10;
 
-    const triggerNear = (x: number) => {
-      const strings = stringsRef.current;
+    // Point along vein i at parameter t (0 = source, 1 = tip), before pluck displacement.
+    const veinPoint = (i: number, t: number) => {
+      const g = gap();
+      const tipX = g * i + g / 2;
+      const sx = sourceX();
+      const sy = sourceY();
+      const cx = sx + (tipX - sx) * 0.55;
+      const cy = height * 0.42;
+      const it = 1 - t;
+      const x = it * it * sx + 2 * it * t * cx + t * t * tipX;
+      const y = it * it * sy + 2 * it * t * cy + t * t * 0;
+      return { x, y, tipX };
+    };
+
+    const triggerNear = (x: number, y: number) => {
+      const veins = veinsRef.current;
       const g = gap();
       const now = performance.now();
-      strings.forEach((s, i) => {
-        const sx = g * i + g / 2;
-        const dist = Math.abs(sx - x);
+      const tApprox = Math.min(1, Math.max(0, 1 - y / height));
+      veins.forEach((s, i) => {
+        const p = veinPoint(i, tApprox);
+        const dist = Math.abs(p.x - x);
         if (dist < g * 1.4) {
-          s.velocity += (dist < g * 0.5 ? 14 : 7) * (x > sx ? -1 : 1);
+          s.velocity += (dist < g * 0.5 ? 14 : 7) * (x > p.x ? -1 : 1);
           if (now - s.lastPluckAt > 220) {
             s.lastPluckAt = now;
             const note = SCALE[i % SCALE.length];
@@ -97,12 +149,12 @@ export function CurtainHero() {
       const rect = canvas.getBoundingClientRect();
       const x = e.clientX - rect.left;
       const y = e.clientY - rect.top;
-      pointerRef.current = { x, y, down: e.buttons > 0 };
-      if (e.buttons > 0) triggerNear(x);
+      pointerRef.current = { x, y };
+      if (e.buttons > 0) triggerNear(x, y);
     };
     const onPointerDown = (e: PointerEvent) => {
       const rect = canvas.getBoundingClientRect();
-      triggerNear(e.clientX - rect.left);
+      triggerNear(e.clientX - rect.left, e.clientY - rect.top);
     };
     const onPointerLeave = () => {
       pointerRef.current = null;
@@ -115,46 +167,65 @@ export function CurtainHero() {
     const draw = () => {
       ctx.clearRect(0, 0, width, height);
       const g = gap();
-      const strings = stringsRef.current;
+      const veins = veinsRef.current;
       const pointer = pointerRef.current;
+      const elapsed = performance.now() - startedAt;
+      const beat = heartbeatCurve(elapsed % BEAT_PERIOD);
 
-      for (let i = 0; i < strings.length; i++) {
-        const s = strings[i];
+      for (let i = 0; i < veins.length; i++) {
+        const s = veins[i];
         const springForce = -s.offset * 0.06;
         const damping = s.velocity * 0.9;
         s.velocity += springForce - damping * 0.06;
         s.offset += s.velocity * 0.6;
 
-        const baseX = g * i + g / 2;
-        const hoverBoost =
-          pointer && Math.abs(pointer.x - baseX) < g * 3
-            ? (1 - Math.abs(pointer.x - baseX) / (g * 3)) * 6
-            : 0;
+        let hoverBoost = 0;
+        if (pointer) {
+          const tHover = Math.min(1, Math.max(0, 1 - pointer.y / height));
+          const atHover = veinPoint(i, tHover);
+          const hoverDist = Math.abs(pointer.x - atHover.x);
+          if (hoverDist < g * 3) {
+            hoverBoost = (1 - hoverDist / (g * 3)) * 6;
+          }
+        }
 
-        const segments = 24;
+        const segments = 26;
         ctx.beginPath();
         for (let seg = 0; seg <= segments; seg++) {
           const t = seg / segments;
+          const p = veinPoint(i, t);
           const bow = Math.sin(t * Math.PI) * (s.offset + hoverBoost);
-          const x = baseX + bow;
-          const y = t * height;
-          if (seg === 0) ctx.moveTo(x, y);
-          else ctx.lineTo(x, y);
+          const x = p.x + bow;
+          if (seg === 0) ctx.moveTo(x, p.y);
+          else ctx.lineTo(x, p.y);
         }
-        const [tr, tg, tb] = THREAD_COLORS[i % THREAD_COLORS.length];
-        const warmth = 0.6 + (Math.sin(i * 0.7) + 1) * 0.12;
-        ctx.strokeStyle = `rgba(${tr}, ${tg}, ${tb}, ${warmth})`;
-        ctx.lineWidth = 1.8;
+        const [tr, tg, tb] = VEIN_COLORS[i % VEIN_COLORS.length];
+        const warmth = 0.45 + (Math.sin(i * 0.7) + 1) * 0.1 + beat * 0.3;
+        ctx.strokeStyle = `rgba(${tr}, ${tg}, ${tb}, ${Math.min(1, warmth)})`;
+        ctx.lineWidth = 1.5 + beat * 0.9;
         ctx.stroke();
 
         ctx.beginPath();
-        const t2 = 0.5;
-        const bow2 = Math.sin(t2 * Math.PI) * (s.offset + hoverBoost);
-        const glow = Math.min(0.85, Math.abs(s.velocity) * 0.07);
+        const mid = veinPoint(i, 0.5);
+        const bow2 = Math.sin(Math.PI / 2) * (s.offset + hoverBoost);
+        const glow = Math.min(0.9, Math.abs(s.velocity) * 0.07 + beat * 0.18);
         ctx.fillStyle = `rgba(${tr}, ${tg}, ${tb}, ${glow})`;
-        ctx.arc(baseX + bow2, height * 0.5, 4, 0, Math.PI * 2);
+        ctx.arc(mid.x + bow2, mid.y, 3.2 + beat * 1.5, 0, Math.PI * 2);
         ctx.fill();
       }
+
+      // The source — a living pulse everything else branches from.
+      const sx = sourceX();
+      const sy = sourceY();
+      const coreR = 22 + beat * 20;
+      const grad = ctx.createRadialGradient(sx, sy, 0, sx, sy, coreR);
+      grad.addColorStop(0, `rgba(244, 136, 29, ${0.55 + beat * 0.4})`);
+      grad.addColorStop(0.5, `rgba(225, 58, 42, ${0.25 + beat * 0.2})`);
+      grad.addColorStop(1, "rgba(225, 58, 42, 0)");
+      ctx.fillStyle = grad;
+      ctx.beginPath();
+      ctx.arc(sx, sy, coreR, 0, Math.PI * 2);
+      ctx.fill();
 
       rafRef.current = requestAnimationFrame(draw);
     };
@@ -178,6 +249,7 @@ export function CurtainHero() {
 
   return (
     <section
+      ref={sectionRef}
       id="story"
       className="relative h-[100svh] w-full overflow-hidden mesh-dusk"
       aria-label="Pecia opening experience"
@@ -193,7 +265,7 @@ export function CurtainHero() {
             ref={canvasRef}
             className="absolute inset-0 h-full w-full touch-none"
             role="img"
-            aria-label="An interactive woven curtain that plays musical notes when touched"
+            aria-label="A field of pulsing, vein-like vessels that play musical notes when touched"
           />
         )}
 
@@ -222,8 +294,8 @@ export function CurtainHero() {
         >
           <p className="max-w-xs font-mono-label text-[11px] uppercase tracking-[0.3em] text-ivory-dim sm:max-w-none">
             {reducedMotion
-              ? "An interactive curtain lives here — motion reduced for your device"
-              : "Drag across the strings. The fabric is an instrument."}
+              ? "A living pulse lives here — motion reduced for your device"
+              : "Drag across the veins below. Feel it pulse."}
           </p>
           <button
             onClick={handleReveal}
@@ -243,7 +315,7 @@ export function CurtainHero() {
             className="absolute inset-0 z-20 flex flex-col items-center justify-center gap-6 text-center"
           >
             <span className="font-mono-label text-[11px] uppercase tracking-[0.4em] text-turmeric-soft">
-              Behind the curtain
+              It leads here
             </span>
             <h2 className="font-display text-6xl font-black uppercase text-gradient-sunrise sm:text-8xl">
               INDIA.

@@ -1,4 +1,5 @@
-import { CurtainHero } from "@/components/sections/CurtainHero";
+import { PulseHero } from "@/components/sections/PulseHero";
+import { PulseStatement } from "@/components/sections/PulseStatement";
 import { PatternDivider } from "@/components/PatternDivider";
 import { IndiaCivilization } from "@/components/sections/IndiaCivilization";
 import { IndiaComplexity } from "@/components/sections/IndiaComplexity";
@@ -30,7 +31,8 @@ import { ContactFooter } from "@/components/sections/ContactFooter";
 export default function Home() {
   return (
     <main className="flex-1">
-      <CurtainHero />
+      <PulseHero />
+      <PulseStatement />
       <PatternDivider className="bg-charcoal" />
       <IndiaCivilization />
       <IndiaComplexity />
