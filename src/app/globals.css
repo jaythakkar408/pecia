@@ -1,0 +1,101 @@
+@import "tailwindcss";
+
+:root {
+  --color-ink: #0b0a09;
+  --color-charcoal: #16130f;
+  --color-charcoal-soft: #221d17;
+  --color-ivory: #f4ecdc;
+  --color-ivory-dim: #ded2b8;
+  --color-saffron: #e2872f;
+  --color-saffron-soft: #f0aa5f;
+  --color-spice: #b3402b;
+  --color-copper: #a97540;
+  --color-turmeric: #c99a2e;
+  --color-indigo: #232a52;
+  --color-indigo-soft: #333c72;
+  --color-emerald: #1f6e5c;
+
+  --background: var(--color-ink);
+  --foreground: var(--color-ivory);
+}
+
+@theme inline {
+  --color-ink: var(--color-ink);
+  --color-charcoal: var(--color-charcoal);
+  --color-charcoal-soft: var(--color-charcoal-soft);
+  --color-ivory: var(--color-ivory);
+  --color-ivory-dim: var(--color-ivory-dim);
+  --color-saffron: var(--color-saffron);
+  --color-saffron-soft: var(--color-saffron-soft);
+  --color-spice: var(--color-spice);
+  --color-copper: var(--color-copper);
+  --color-turmeric: var(--color-turmeric);
+  --color-indigo: var(--color-indigo);
+  --color-indigo-soft: var(--color-indigo-soft);
+  --color-emerald: var(--color-emerald);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --font-display: var(--font-fraunces);
+  --font-sans: var(--font-manrope);
+  --font-mono: var(--font-space-mono);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+}
+
+::selection {
+  background: var(--color-saffron);
+  color: var(--color-ink);
+}
+
+.font-display {
+  font-family: var(--font-display), Georgia, serif;
+}
+
+.font-mono-label {
+  font-family: var(--font-mono), monospace;
+}
+
+.grain {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  pointer-events: none;
+  opacity: 0.05;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.text-balance {
+  text-wrap: balance;
+}
+
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-14px); }
+}
+
+.animate-float-slow {
+  animation: float-slow 7s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-float-slow {
+    animation: none;
+  }
+}
