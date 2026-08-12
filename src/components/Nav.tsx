@@ -74,7 +74,7 @@ export function Nav() {
 
           <Link
             href="#contact"
-            className="hidden rounded-full bg-saffron px-5 py-2 font-mono-label text-[11px] uppercase tracking-[0.2em] text-ink transition hover:bg-saffron-soft sm:inline-block"
+            className="hidden rounded-full bg-gradient-to-r from-saffron via-rani to-turmeric px-5 py-2 font-mono-label text-[11px] font-bold uppercase tracking-[0.2em] text-ink transition hover:opacity-90 sm:inline-block"
           >
             Build with Pecia →
           </Link>

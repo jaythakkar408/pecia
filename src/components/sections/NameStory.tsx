@@ -1,6 +1,7 @@
 "use client";
 
 import { Reveal } from "@/components/Reveal";
+import { HUE_BORDER, HUE_TEXT, hue } from "@/lib/palette";
 
 const CHAIN = [
   "Recipe", "Concept", "Restaurant", "Brand",
@@ -9,15 +10,15 @@ const CHAIN = [
 
 export function NameStory() {
   return (
-    <section className="relative bg-charcoal-soft py-28 sm:py-40">
+    <section className="relative mesh-charcoal py-28 sm:py-40">
       <div className="mx-auto max-w-4xl px-6">
         <Reveal>
-          <span className="font-mono-label text-[11px] uppercase tracking-[0.35em] text-saffron">
+          <span className="font-mono-label text-[11px] uppercase tracking-[0.35em] text-turmeric-soft">
             The Name
           </span>
         </Reveal>
         <Reveal delay={0.05}>
-          <h2 className="mt-4 font-display text-3xl text-ivory sm:text-5xl">
+          <h2 className="mt-4 font-display text-3xl font-extrabold text-gradient-warm sm:text-5xl">
             Pecia.
           </h2>
         </Reveal>
@@ -39,7 +40,7 @@ export function NameStory() {
         </Reveal>
 
         <Reveal delay={0.2}>
-          <p className="mt-10 font-display text-2xl text-saffron-soft sm:text-3xl text-balance">
+          <p className="mt-10 font-display text-2xl font-bold text-turmeric-soft sm:text-3xl text-balance">
             Now replace knowledge with food brands.
           </p>
         </Reveal>
@@ -55,7 +56,7 @@ export function NameStory() {
         </Reveal>
 
         <Reveal delay={0.3}>
-          <p className="mt-10 font-display text-3xl text-ivory sm:text-5xl text-balance">
+          <p className="mt-10 font-display text-3xl font-extrabold text-ivory sm:text-5xl text-balance">
             From one piece to something much bigger.
           </p>
         </Reveal>
@@ -64,7 +65,9 @@ export function NameStory() {
           <div className="mt-20 flex flex-wrap items-center justify-center gap-3">
             {CHAIN.map((step, i) => (
               <div key={step} className="flex items-center gap-3">
-                <span className="rounded-full border border-saffron/30 bg-saffron/5 px-4 py-2 font-mono-label text-xs uppercase tracking-[0.2em] text-saffron-soft">
+                <span
+                  className={`rounded-full border px-4 py-2 font-mono-label text-xs uppercase tracking-[0.2em] ${hue(HUE_BORDER, i)} ${hue(HUE_TEXT, i)}`}
+                >
                   {step}
                 </span>
                 {i < CHAIN.length - 1 && (
@@ -78,7 +81,7 @@ export function NameStory() {
         </Reveal>
 
         <Reveal delay={0.4}>
-          <p className="mt-16 text-center font-display text-2xl italic text-ivory sm:text-3xl">
+          <p className="mt-16 text-center font-display text-2xl font-bold text-ivory sm:text-3xl">
             Scale without losing the soul.
           </p>
         </Reveal>

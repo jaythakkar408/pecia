@@ -8,6 +8,15 @@ import { usePrefersReducedMotion } from "@/lib/useReducedMotion";
 const STRING_COUNT = 48;
 // A warm, north-Indian-classical-leaning pentatonic run across two octaves.
 const SCALE = [220, 246.94, 277.18, 329.63, 369.99, 440, 493.88, 554.37, 659.25, 739.99];
+// Ikat/dhurrie thread colors — each string is a different vivid thread.
+const THREAD_COLORS = [
+  [244, 136, 29], // saffron
+  [214, 35, 110], // rani pink
+  [240, 180, 41], // turmeric
+  [14, 138, 114], // peacock
+  [225, 58, 42], // vermilion
+  [77, 82, 196], // indigo
+];
 
 type StringState = {
   offset: number;
@@ -132,16 +141,18 @@ export function CurtainHero() {
           if (seg === 0) ctx.moveTo(x, y);
           else ctx.lineTo(x, y);
         }
-        const warmth = 0.55 + (Math.sin(i * 0.7) + 1) * 0.08;
-        ctx.strokeStyle = `rgba(226, 135, 47, ${warmth})`;
-        ctx.lineWidth = 1.4;
+        const [tr, tg, tb] = THREAD_COLORS[i % THREAD_COLORS.length];
+        const warmth = 0.6 + (Math.sin(i * 0.7) + 1) * 0.12;
+        ctx.strokeStyle = `rgba(${tr}, ${tg}, ${tb}, ${warmth})`;
+        ctx.lineWidth = 1.8;
         ctx.stroke();
 
         ctx.beginPath();
         const t2 = 0.5;
         const bow2 = Math.sin(t2 * Math.PI) * (s.offset + hoverBoost);
-        ctx.fillStyle = `rgba(244, 236, 220, ${Math.min(0.5, Math.abs(s.velocity) * 0.05)})`;
-        ctx.arc(baseX + bow2, height * 0.5, 3, 0, Math.PI * 2);
+        const glow = Math.min(0.85, Math.abs(s.velocity) * 0.07);
+        ctx.fillStyle = `rgba(${tr}, ${tg}, ${tb}, ${glow})`;
+        ctx.arc(baseX + bow2, height * 0.5, 4, 0, Math.PI * 2);
         ctx.fill();
       }
 
@@ -168,7 +179,7 @@ export function CurtainHero() {
   return (
     <section
       id="story"
-      className="relative h-[100svh] w-full overflow-hidden bg-ink"
+      className="relative h-[100svh] w-full overflow-hidden mesh-dusk"
       aria-label="Pecia opening experience"
     >
       <div
@@ -194,10 +205,10 @@ export function CurtainHero() {
               transition={{ duration: 0.6 }}
               className="pointer-events-none absolute inset-x-0 top-[18%] flex flex-col items-center gap-3 text-center"
             >
-              <span className="font-mono-label text-[11px] uppercase tracking-[0.35em] text-ivory-dim">
+              <span className="font-mono-label text-[11px] uppercase tracking-[0.35em] text-turmeric-soft">
                 Pecia Food Brands Private Limited
               </span>
-              <h1 className="font-display text-4xl italic text-ivory sm:text-5xl">
+              <h1 className="font-display text-5xl font-extrabold uppercase text-gradient-warm sm:text-7xl">
                 Touch it.
               </h1>
             </motion.div>
@@ -216,7 +227,7 @@ export function CurtainHero() {
           </p>
           <button
             onClick={handleReveal}
-            className="pointer-events-auto rounded-full border border-ivory-dim/40 px-6 py-2 font-mono-label text-[11px] uppercase tracking-[0.3em] text-ivory transition hover:border-saffron hover:text-saffron"
+            className="pointer-events-auto rounded-full border border-turmeric-soft/50 px-6 py-2 font-mono-label text-[11px] uppercase tracking-[0.3em] text-ivory transition hover:border-rani hover:text-rani-soft"
           >
             {reducedMotion ? "Enter" : "Skip to India →"}
           </button>
@@ -231,10 +242,10 @@ export function CurtainHero() {
             transition={{ duration: 1, delay: 0.6 }}
             className="absolute inset-0 z-20 flex flex-col items-center justify-center gap-6 text-center"
           >
-            <span className="font-mono-label text-[11px] uppercase tracking-[0.4em] text-saffron">
+            <span className="font-mono-label text-[11px] uppercase tracking-[0.4em] text-turmeric-soft">
               Behind the curtain
             </span>
-            <h2 className="font-display text-5xl text-ivory sm:text-7xl">
+            <h2 className="font-display text-6xl font-black uppercase text-gradient-sunrise sm:text-8xl">
               INDIA.
             </h2>
           </motion.div>

@@ -1,6 +1,7 @@
 "use client";
 
 import { Reveal } from "@/components/Reveal";
+import { HUE_DOT, HUE_TEXT, hue } from "@/lib/palette";
 
 const JOURNEY = [
   { step: "Where they started", note: "A concept, a restaurant, or a brand looking at India." },
@@ -13,15 +14,15 @@ const JOURNEY = [
 
 export function Proof() {
   return (
-    <section className="relative bg-ink py-28 sm:py-40">
+    <section className="relative mesh-ink py-28 sm:py-40">
       <div className="mx-auto max-w-4xl px-6">
         <Reveal>
-          <span className="font-mono-label text-[11px] uppercase tracking-[0.35em] text-saffron">
+          <span className="font-mono-label text-[11px] uppercase tracking-[0.35em] text-turmeric-soft">
             How We Work
           </span>
         </Reveal>
         <Reveal delay={0.05}>
-          <h2 className="mt-4 max-w-2xl font-display text-3xl text-ivory sm:text-5xl text-balance">
+          <h2 className="mt-4 max-w-2xl font-display text-3xl font-bold text-ivory sm:text-5xl text-balance">
             Story creates attention. Proof creates trust.
           </h2>
         </Reveal>
@@ -35,7 +36,7 @@ export function Proof() {
 
         <div className="relative mt-14">
           <div
-            className="absolute left-4 top-2 bottom-2 w-px bg-gradient-to-b from-saffron via-copper to-indigo-soft"
+            className="absolute left-4 top-2 bottom-2 w-px bg-gradient-to-b from-saffron via-rani to-peacock"
             aria-hidden="true"
           />
           <div className="space-y-8">
@@ -43,10 +44,10 @@ export function Proof() {
               <Reveal key={item.step} delay={i * 0.04} y={12}>
                 <div className="relative pl-12">
                   <span
-                    className="absolute left-2.5 top-1.5 h-3 w-3 -translate-x-1/2 rounded-full bg-saffron"
+                    className={`absolute left-2.5 top-1.5 h-3 w-3 -translate-x-1/2 rounded-full ${hue(HUE_DOT, i)}`}
                     aria-hidden="true"
                   />
-                  <h3 className="font-display text-lg text-ivory">
+                  <h3 className={`font-display text-lg font-bold ${hue(HUE_TEXT, i)}`}>
                     {item.step}
                   </h3>
                   <p className="mt-1 text-sm text-ivory-dim">{item.note}</p>

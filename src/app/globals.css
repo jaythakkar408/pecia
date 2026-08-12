@@ -1,19 +1,28 @@
 @import "tailwindcss";
 
 :root {
-  --color-ink: #0b0a09;
-  --color-charcoal: #16130f;
-  --color-charcoal-soft: #221d17;
-  --color-ivory: #f4ecdc;
-  --color-ivory-dim: #ded2b8;
-  --color-saffron: #e2872f;
-  --color-saffron-soft: #f0aa5f;
-  --color-spice: #b3402b;
-  --color-copper: #a97540;
-  --color-turmeric: #c99a2e;
-  --color-indigo: #232a52;
-  --color-indigo-soft: #333c72;
-  --color-emerald: #1f6e5c;
+  --color-ink: #0f0906;
+  --color-charcoal: #1c130d;
+  --color-charcoal-soft: #2b1c12;
+  --color-ivory: #fbeedb;
+  --color-ivory-dim: #e7cfa0;
+
+  --color-saffron: #f4881d;
+  --color-saffron-soft: #ffab52;
+  --color-spice: #e13a2a;
+  --color-spice-soft: #ff6b53;
+  --color-turmeric: #f0b429;
+  --color-turmeric-soft: #ffd166;
+  --color-rani: #d6236e;
+  --color-rani-soft: #f0579c;
+  --color-peacock: #0e8a72;
+  --color-peacock-soft: #2bbf9e;
+  --color-indigo: #2b2f7d;
+  --color-indigo-soft: #4d52c4;
+  --color-copper: #c17a3d;
+
+  /* legacy alias kept so earlier work still resolves */
+  --color-emerald: #0e8a72;
 
   --background: var(--color-ink);
   --foreground: var(--color-ivory);
@@ -25,19 +34,26 @@
   --color-charcoal-soft: var(--color-charcoal-soft);
   --color-ivory: var(--color-ivory);
   --color-ivory-dim: var(--color-ivory-dim);
+
   --color-saffron: var(--color-saffron);
   --color-saffron-soft: var(--color-saffron-soft);
   --color-spice: var(--color-spice);
-  --color-copper: var(--color-copper);
+  --color-spice-soft: var(--color-spice-soft);
   --color-turmeric: var(--color-turmeric);
+  --color-turmeric-soft: var(--color-turmeric-soft);
+  --color-rani: var(--color-rani);
+  --color-rani-soft: var(--color-rani-soft);
+  --color-peacock: var(--color-peacock);
+  --color-peacock-soft: var(--color-peacock-soft);
   --color-indigo: var(--color-indigo);
   --color-indigo-soft: var(--color-indigo-soft);
+  --color-copper: var(--color-copper);
   --color-emerald: var(--color-emerald);
 
   --color-background: var(--background);
   --color-foreground: var(--foreground);
 
-  --font-display: var(--font-fraunces);
+  --font-display: var(--font-unbounded);
   --font-sans: var(--font-manrope);
   --font-mono: var(--font-space-mono);
 }
@@ -59,12 +75,12 @@ body {
 }
 
 ::selection {
-  background: var(--color-saffron);
-  color: var(--color-ink);
+  background: var(--color-rani);
+  color: var(--color-ivory);
 }
 
 .font-display {
-  font-family: var(--font-display), Georgia, serif;
+  font-family: var(--font-display), "Arial Black", sans-serif;
 }
 
 .font-mono-label {
@@ -83,6 +99,79 @@ body {
 
 .text-balance {
   text-wrap: balance;
+}
+
+.text-gradient-warm {
+  background: linear-gradient(90deg, var(--color-saffron) 0%, var(--color-rani) 55%, var(--color-turmeric) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.text-gradient-sunrise {
+  background: linear-gradient(90deg, var(--color-turmeric) 0%, var(--color-saffron) 45%, var(--color-spice) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ---- vivid section grounds ---- */
+
+.mesh-ink {
+  background:
+    radial-gradient(ellipse 70% 50% at 15% 0%, rgba(244, 136, 29, 0.16), transparent 60%),
+    radial-gradient(ellipse 60% 50% at 100% 100%, rgba(214, 35, 110, 0.14), transparent 55%),
+    var(--color-ink);
+}
+
+.mesh-charcoal {
+  background:
+    radial-gradient(ellipse 80% 60% at 90% -10%, rgba(240, 180, 41, 0.14), transparent 55%),
+    radial-gradient(ellipse 70% 50% at 0% 110%, rgba(14, 138, 114, 0.16), transparent 55%),
+    var(--color-charcoal);
+}
+
+.mesh-indigo {
+  background:
+    radial-gradient(ellipse 90% 70% at 85% -10%, rgba(77, 82, 196, 0.55), transparent 60%),
+    radial-gradient(ellipse 80% 60% at 5% 110%, rgba(214, 35, 110, 0.3), transparent 55%),
+    var(--color-indigo);
+}
+
+.mesh-spice {
+  background:
+    radial-gradient(ellipse 90% 70% at 10% -10%, rgba(255, 209, 102, 0.35), transparent 55%),
+    radial-gradient(ellipse 80% 60% at 100% 110%, rgba(43, 47, 125, 0.35), transparent 55%),
+    linear-gradient(155deg, var(--color-spice), #9c2318 85%);
+}
+
+.mesh-turmeric {
+  background: linear-gradient(180deg, #ffd166 0%, #f4881d 45%, #d9670f 75%, #b5510d 100%);
+}
+
+.mesh-peacock {
+  background:
+    radial-gradient(ellipse 90% 70% at 80% -10%, rgba(43, 191, 158, 0.4), transparent 60%),
+    radial-gradient(ellipse 80% 60% at 10% 110%, rgba(43, 47, 125, 0.4), transparent 55%),
+    var(--color-ink);
+}
+
+.mesh-dusk {
+  background:
+    radial-gradient(ellipse 90% 60% at 50% 105%, rgba(244, 136, 29, 0.5), transparent 60%),
+    radial-gradient(ellipse 70% 50% at 15% 90%, rgba(225, 58, 42, 0.35), transparent 55%),
+    radial-gradient(ellipse 70% 50% at 85% 90%, rgba(214, 35, 110, 0.3), transparent 55%),
+    linear-gradient(180deg, var(--color-ink) 0%, #170f1d 55%, #26130f 100%);
+}
+
+.texture-dots {
+  background-image: radial-gradient(rgba(251, 238, 219, 0.12) 1px, transparent 1px);
+  background-size: 18px 18px;
+}
+
+.texture-dots-dark {
+  background-image: radial-gradient(rgba(15, 9, 6, 0.18) 1px, transparent 1px);
+  background-size: 18px 18px;
 }
 
 @keyframes float-slow {

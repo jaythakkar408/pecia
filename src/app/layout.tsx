@@ -1,14 +1,13 @@
 import type { Metadata } from "next";
-import { Fraunces, Manrope, Space_Mono } from "next/font/google";
+import { Unbounded, Manrope, Space_Mono } from "next/font/google";
 import { SoundProvider } from "@/components/SoundProvider";
 import { Nav } from "@/components/Nav";
 import "./globals.css";
 
-const fraunces = Fraunces({
-  variable: "--font-fraunces",
+const unbounded = Unbounded({
+  variable: "--font-unbounded",
   subsets: ["latin"],
-  axes: ["opsz", "SOFT", "WONK"],
-  style: ["normal", "italic"],
+  weight: ["400", "500", "600", "700", "800", "900"],
 });
 
 const manrope = Manrope({
@@ -48,7 +47,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${fraunces.variable} ${manrope.variable} ${spaceMono.variable} h-full antialiased`}
+      className={`${unbounded.variable} ${manrope.variable} ${spaceMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-ink text-ivory">
         <div className="grain" aria-hidden="true" />

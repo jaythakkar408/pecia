@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { Reveal } from "@/components/Reveal";
 import { NetworkConverge } from "@/components/NetworkConverge";
+import { HUE_BORDER, HUE_TEXT, hue } from "@/lib/palette";
 
 const OPTIONS = [
   { label: "Enter India →", href: "#contact" },
@@ -13,7 +14,7 @@ const OPTIONS = [
 
 export function FinalScene() {
   return (
-    <section className="relative bg-ink py-28 sm:py-40">
+    <section className="relative mesh-dusk py-28 sm:py-40">
       <div className="mx-auto max-w-4xl px-6 text-center">
         <Reveal>
           <NetworkConverge
@@ -29,14 +30,14 @@ export function FinalScene() {
           </p>
         </Reveal>
         <Reveal delay={0.22}>
-          <p className="mt-6 font-display text-3xl text-ivory sm:text-4xl text-balance">
+          <p className="mt-6 font-display text-3xl font-bold text-ivory sm:text-4xl text-balance">
             Now we are building its next generation of food brands.
           </p>
         </Reveal>
 
         <Reveal delay={0.3}>
           <div className="mt-14">
-            <p className="font-display text-4xl text-saffron sm:text-6xl">
+            <p className="font-display text-5xl font-black text-gradient-sunrise sm:text-7xl">
               PECIA
             </p>
             <p className="mt-3 font-mono-label text-xs uppercase tracking-[0.3em] text-ivory-dim">
@@ -46,18 +47,18 @@ export function FinalScene() {
         </Reveal>
 
         <Reveal delay={0.4}>
-          <p className="mt-16 font-display text-3xl text-ivory sm:text-5xl">
+          <p className="mt-16 font-display text-3xl font-bold text-ivory sm:text-5xl">
             What will you build?
           </p>
         </Reveal>
 
         <Reveal delay={0.46}>
           <div className="mt-10 flex flex-wrap justify-center gap-4">
-            {OPTIONS.map((opt) => (
+            {OPTIONS.map((opt, i) => (
               <Link
                 key={opt.label}
                 href={opt.href}
-                className="rounded-full border border-ivory/20 px-5 py-2.5 text-sm text-ivory transition hover:border-saffron hover:text-saffron-soft"
+                className={`rounded-full border bg-ink/30 px-5 py-2.5 text-sm font-semibold transition hover:bg-ink/60 ${hue(HUE_BORDER, i)} ${hue(HUE_TEXT, i)}`}
               >
                 {opt.label}
               </Link>

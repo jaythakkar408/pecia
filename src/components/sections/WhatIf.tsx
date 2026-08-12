@@ -1,6 +1,7 @@
 "use client";
 
 import { Reveal } from "@/components/Reveal";
+import { HUE_TEXT, hue } from "@/lib/palette";
 
 const POSSIBILITIES = [
   "Enter India?",
@@ -15,10 +16,10 @@ const POSSIBILITIES = [
 
 export function WhatIf() {
   return (
-    <section className="relative bg-ink py-28 sm:py-40">
+    <section className="relative mesh-ink py-28 sm:py-40">
       <div className="mx-auto max-w-3xl px-6 text-center">
         <Reveal>
-          <h2 className="font-display text-3xl text-ivory sm:text-5xl text-balance">
+          <h2 className="font-display text-3xl font-bold text-ivory sm:text-5xl text-balance">
             What if your brand could&hellip;
           </h2>
         </Reveal>
@@ -26,7 +27,7 @@ export function WhatIf() {
         <div className="mt-14 space-y-5">
           {POSSIBILITIES.map((item, i) => (
             <Reveal key={item} delay={i * 0.05}>
-              <p className="font-display text-2xl text-ivory-dim sm:text-3xl">
+              <p className={`font-display text-2xl font-semibold sm:text-3xl ${hue(HUE_TEXT, i)}`}>
                 {item}
               </p>
             </Reveal>
@@ -34,12 +35,12 @@ export function WhatIf() {
         </div>
 
         <Reveal delay={0.5}>
-          <p className="mt-16 font-display text-3xl text-ivory sm:text-5xl text-balance">
+          <p className="mt-16 font-display text-3xl font-bold text-ivory sm:text-5xl text-balance">
             What if it could do all of it?
           </p>
         </Reveal>
         <Reveal delay={0.58}>
-          <p className="mt-6 font-display text-5xl text-saffron sm:text-7xl">
+          <p className="mt-6 font-display text-6xl font-black text-gradient-warm sm:text-8xl">
             PECIA.
           </p>
         </Reveal>

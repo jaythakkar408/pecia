@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Reveal } from "@/components/Reveal";
+import { HUE_BORDER, HUE_BG_SOFT, HUE_TEXT, hue } from "@/lib/palette";
 
 const NODES = [
   "Consumer", "Menu", "Pricing", "Location", "Operations",
@@ -13,15 +14,15 @@ export function IndiaEngine() {
   const [active, setActive] = useState<number | null>(null);
 
   return (
-    <section className="relative bg-charcoal-soft py-28 sm:py-40">
+    <section className="relative mesh-charcoal py-28 sm:py-40">
       <div className="mx-auto max-w-4xl px-6">
         <Reveal>
-          <span className="font-mono-label text-[11px] uppercase tracking-[0.35em] text-saffron">
+          <span className="font-mono-label text-[11px] uppercase tracking-[0.35em] text-turmeric-soft">
             The India Engine
           </span>
         </Reveal>
         <Reveal delay={0.05}>
-          <h2 className="mt-4 max-w-2xl font-display text-3xl text-ivory sm:text-5xl text-balance">
+          <h2 className="mt-4 max-w-2xl font-display text-3xl font-bold text-ivory sm:text-5xl text-balance">
             Food businesses are systems. Change one variable and the whole
             system responds.
           </h2>
@@ -37,9 +38,9 @@ export function IndiaEngine() {
                 <button
                   onMouseEnter={() => setActive(i)}
                   onFocus={() => setActive(i)}
-                  className={`rounded-full border px-4 py-2 text-sm transition ${
+                  className={`rounded-full border px-4 py-2 text-sm font-semibold transition ${
                     active === i
-                      ? "border-saffron bg-saffron/15 text-saffron-soft"
+                      ? `${hue(HUE_BORDER, i)} ${hue(HUE_BG_SOFT, i)} ${hue(HUE_TEXT, i)}`
                       : "border-ivory/15 text-ivory hover:border-ivory/40"
                   }`}
                 >
@@ -65,7 +66,7 @@ export function IndiaEngine() {
         </Reveal>
 
         <Reveal delay={0.2}>
-          <p className="mt-16 text-center font-display text-2xl italic text-ivory sm:text-3xl">
+          <p className="mt-16 text-center font-display text-2xl font-bold text-turmeric-soft sm:text-3xl">
             Pecia understands the system.
           </p>
         </Reveal>

@@ -1,6 +1,7 @@
 "use client";
 
 import { Reveal } from "@/components/Reveal";
+import { HUE_DOT, HUE_TEXT, hue } from "@/lib/palette";
 
 const CIVILIZATION_MARKS = [
   "Fire", "Clay", "Grain", "Spice Routes", "Open Markets",
@@ -21,25 +22,25 @@ const EVOLUTION = [
 
 export function IndiaCivilization() {
   return (
-    <section id="india" className="relative bg-charcoal py-28 sm:py-40">
+    <section id="india" className="relative mesh-charcoal py-28 sm:py-40">
       <div className="mx-auto max-w-6xl px-6">
         <Reveal>
-          <span className="font-mono-label text-[11px] uppercase tracking-[0.35em] text-saffron">
+          <span className="font-mono-label text-[11px] uppercase tracking-[0.35em] text-turmeric-soft">
             Chapter One
           </span>
         </Reveal>
         <Reveal delay={0.05}>
-          <h2 className="mt-4 max-w-3xl font-display text-3xl text-ivory sm:text-5xl text-balance">
+          <h2 className="mt-4 max-w-3xl font-display text-3xl font-bold text-ivory sm:text-5xl text-balance">
             India has always been a living food civilization.
           </h2>
         </Reveal>
 
         <Reveal delay={0.1}>
-          <div className="mt-10 flex flex-wrap gap-x-6 gap-y-3">
-            {CIVILIZATION_MARKS.map((mark) => (
+          <div className="mt-10 flex flex-wrap gap-x-3 gap-y-3">
+            {CIVILIZATION_MARKS.map((mark, i) => (
               <span
                 key={mark}
-                className="font-mono-label text-xs uppercase tracking-[0.2em] text-ivory-dim"
+                className={`rounded-full border border-ivory/10 bg-ink/40 px-3 py-1 font-mono-label text-xs uppercase tracking-[0.2em] ${hue(HUE_TEXT, i)}`}
               >
                 {mark}
               </span>
@@ -47,19 +48,19 @@ export function IndiaCivilization() {
           </div>
         </Reveal>
 
-        <div className="mt-28 space-y-24 text-center">
+        <div className="mt-28 space-y-10 text-center">
           <Reveal>
-            <p className="font-display text-3xl italic text-saffron-soft sm:text-5xl">
+            <p className="font-display text-4xl font-extrabold uppercase text-turmeric-soft sm:text-6xl">
               Food evolves.
             </p>
           </Reveal>
           <Reveal>
-            <p className="font-display text-3xl italic text-spice sm:text-5xl">
+            <p className="font-display text-4xl font-extrabold uppercase text-rani-soft sm:text-6xl">
               India evolves.
             </p>
           </Reveal>
           <Reveal>
-            <p className="font-display text-4xl text-ivory sm:text-6xl text-balance">
+            <p className="font-display text-4xl font-extrabold text-ivory sm:text-6xl text-balance">
               Brands must evolve with it.
             </p>
           </Reveal>
@@ -67,7 +68,7 @@ export function IndiaCivilization() {
 
         <div className="relative mt-28">
           <div
-            className="absolute left-4 top-2 bottom-2 w-px bg-gradient-to-b from-saffron via-copper to-indigo-soft sm:left-1/2"
+            className="absolute left-4 top-2 bottom-2 w-px bg-gradient-to-b from-saffron via-rani to-peacock sm:left-1/2"
             aria-hidden="true"
           />
           <div className="space-y-10">
@@ -81,7 +82,7 @@ export function IndiaCivilization() {
                   }`}
                 >
                   <span
-                    className="absolute left-2.5 top-1.5 h-3 w-3 -translate-x-1/2 rounded-full bg-saffron sm:left-auto sm:right-0 sm:translate-x-1/2"
+                    className={`absolute left-2.5 top-1.5 h-3 w-3 -translate-x-1/2 rounded-full sm:left-auto sm:right-0 sm:translate-x-1/2 ${hue(HUE_DOT, i)}`}
                     style={
                       i % 2 === 1
                         ? { left: "-0.75rem", right: "auto" }
@@ -95,7 +96,7 @@ export function IndiaCivilization() {
                         {step.era}
                       </span>
                     )}
-                    <h3 className="mt-1 font-display text-xl text-ivory sm:text-2xl">
+                    <h3 className={`mt-1 font-display text-xl font-bold sm:text-2xl ${hue(HUE_TEXT, i)}`}>
                       {step.label}
                     </h3>
                     <p className="mt-1 text-sm text-ivory-dim">{step.note}</p>

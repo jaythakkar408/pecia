@@ -1,18 +1,19 @@
 "use client";
 
 import { Reveal } from "@/components/Reveal";
+import { HUE_TEXT, hue } from "@/lib/palette";
 
 export function Capital() {
   return (
-    <section className="relative bg-ink py-28 sm:py-40">
+    <section className="relative mesh-ink py-28 sm:py-40">
       <div className="mx-auto max-w-3xl px-6 text-center">
         <Reveal>
-          <span className="font-mono-label text-[11px] uppercase tracking-[0.35em] text-saffron">
+          <span className="font-mono-label text-[11px] uppercase tracking-[0.35em] text-turmeric-soft">
             Capital &amp; Investment
           </span>
         </Reveal>
         <Reveal delay={0.05}>
-          <h2 className="mt-4 font-display text-3xl text-ivory sm:text-5xl text-balance">
+          <h2 className="mt-4 font-display text-3xl font-bold text-ivory sm:text-5xl text-balance">
             Food brands need more than strategy.
           </h2>
         </Reveal>
@@ -24,12 +25,12 @@ export function Capital() {
         </Reveal>
 
         <Reveal delay={0.15}>
-          <div className="mt-10 flex flex-wrap justify-center gap-4 font-display text-lg text-ivory sm:text-xl">
+          <div className="mt-10 flex flex-wrap justify-center gap-4 font-display text-lg font-semibold text-ivory sm:text-xl">
             {["Brands", "Capital", "Operators", "Franchisees", "Markets", "Opportunities"].map(
               (item, i, arr) => (
-                <span key={item} className="flex items-center gap-4">
+                <span key={item} className={`flex items-center gap-4 ${hue(HUE_TEXT, i)}`}>
                   {item}
-                  {i < arr.length - 1 && <span className="text-saffron">↔</span>}
+                  {i < arr.length - 1 && <span className="text-ivory-dim">↔</span>}
                 </span>
               )
             )}
@@ -45,7 +46,7 @@ export function Capital() {
         </Reveal>
 
         <Reveal delay={0.28}>
-          <p className="mt-6 font-display text-2xl italic text-saffron-soft sm:text-3xl">
+          <p className="mt-6 font-display text-2xl font-bold text-turmeric-soft sm:text-3xl">
             An ecosystem where food brands can grow.
           </p>
         </Reveal>

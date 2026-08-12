@@ -2,6 +2,9 @@
 
 import { useMemo, useState } from "react";
 import { Reveal } from "@/components/Reveal";
+import { HUE_BG_SOFT, HUE_BORDER, HUE_TEXT, hue } from "@/lib/palette";
+
+const HEX = ["#f4881d", "#d6236e", "#f0b429", "#0e8a72", "#e13a2a", "#4d52c4"];
 
 const CAPABILITIES = [
   { label: "Enter India", note: "Market entry strategy and local execution." },
@@ -34,15 +37,15 @@ export function CapabilityEcosystem() {
   );
 
   return (
-    <section id="what-we-do" className="relative bg-ink py-28 sm:py-40">
+    <section id="what-we-do" className="relative mesh-indigo py-28 sm:py-40">
       <div className="mx-auto max-w-6xl px-6">
         <Reveal>
-          <span className="font-mono-label text-[11px] uppercase tracking-[0.35em] text-saffron">
+          <span className="font-mono-label text-[11px] uppercase tracking-[0.35em] text-turmeric-soft">
             The Capability Ecosystem
           </span>
         </Reveal>
         <Reveal delay={0.05}>
-          <h2 className="mt-4 max-w-2xl font-display text-3xl text-ivory sm:text-5xl text-balance">
+          <h2 className="mt-4 max-w-2xl font-display text-3xl font-bold text-ivory sm:text-5xl text-balance">
             Pecia&rsquo;s advantage isn&rsquo;t one service. It&rsquo;s the
             system.
           </h2>
@@ -62,15 +65,15 @@ export function CapabilityEcosystem() {
                   y1={50}
                   x2={p.x}
                   y2={p.y}
-                  stroke={i === active ? "#e2872f" : "rgba(244,236,220,0.12)"}
-                  strokeWidth={i === active ? 0.5 : 0.3}
+                  stroke={i === active ? HEX[i % HEX.length] : "rgba(251,238,219,0.14)"}
+                  strokeWidth={i === active ? 0.6 : 0.3}
                 />
               ))}
             </svg>
 
             <button
               onClick={() => setActive((a) => (a + 1) % CAPABILITIES.length)}
-              className="absolute left-1/2 top-1/2 flex h-20 w-20 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-saffron/40 bg-charcoal-soft font-display text-sm text-saffron-soft sm:h-24 sm:w-24 sm:text-base"
+              className="absolute left-1/2 top-1/2 flex h-20 w-20 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border-2 border-turmeric bg-ink font-display text-sm font-bold text-turmeric-soft shadow-[0_0_40px_rgba(240,180,41,0.35)] sm:h-24 sm:w-24 sm:text-base"
             >
               PECIA
             </button>
@@ -85,8 +88,8 @@ export function CapabilityEcosystem() {
                 }}
                 className={`absolute -translate-x-1/2 -translate-y-1/2 rounded-full border px-2.5 py-1.5 font-mono-label text-[9px] uppercase tracking-[0.12em] transition sm:px-3 sm:py-2 sm:text-[10px] ${
                   i === active
-                    ? "border-saffron bg-saffron/15 text-saffron-soft"
-                    : "border-ivory/15 bg-ink text-ivory-dim hover:border-ivory/40"
+                    ? `${hue(HUE_BORDER, i)} ${hue(HUE_BG_SOFT, i)} ${hue(HUE_TEXT, i)} border-opacity-100`
+                    : "border-ivory/20 bg-ink/40 text-ivory-dim hover:border-ivory/40"
                 }`}
               >
                 {cap.label}
@@ -97,7 +100,7 @@ export function CapabilityEcosystem() {
 
         <Reveal delay={0.15}>
           <div className="mx-auto mt-10 max-w-md text-center">
-            <h3 className="font-display text-2xl text-ivory">
+            <h3 className={`font-display text-2xl font-bold ${hue(HUE_TEXT, active)}`}>
               {CAPABILITIES[active].label}
             </h3>
             <p className="mt-2 text-sm text-ivory-dim">

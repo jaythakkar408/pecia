@@ -12,12 +12,20 @@ type Region = {
   format: string;
   price: string;
   supply: string;
+  hex: string;
+  border: string;
+  bg: string;
+  text: string;
 };
 
 const REGIONS: Region[] = [
   {
     id: "north",
     name: "North",
+    hex: "#f4881d",
+    border: "border-saffron",
+    bg: "bg-saffron/10",
+    text: "text-saffron-soft",
     cities: "Delhi NCR, Chandigarh, Lucknow, Jaipur",
     behavior: "High dine-out frequency, brand-conscious, celebration-led spending.",
     format: "Large-format dine-in and premium QSR do well.",
@@ -27,6 +35,10 @@ const REGIONS: Region[] = [
   {
     id: "west",
     name: "West",
+    hex: "#e13a2a",
+    border: "border-spice",
+    bg: "bg-spice/10",
+    text: "text-spice-soft",
     cities: "Mumbai, Pune, Ahmedabad, Surat",
     behavior: "Fast-paced, delivery-first, high competitive density.",
     format: "Cloud kitchens and compact high-footfall formats win.",
@@ -36,6 +48,10 @@ const REGIONS: Region[] = [
   {
     id: "south",
     name: "South",
+    hex: "#0e8a72",
+    border: "border-peacock",
+    bg: "bg-peacock/10",
+    text: "text-peacock-soft",
     cities: "Bengaluru, Chennai, Hyderabad, Kochi",
     behavior: "High digital adoption, strong regional cuisine loyalty.",
     format: "Café culture and multi-cuisine QSR expand quickly.",
@@ -45,6 +61,10 @@ const REGIONS: Region[] = [
   {
     id: "east",
     name: "East",
+    hex: "#d6236e",
+    border: "border-rani",
+    bg: "bg-rani/10",
+    text: "text-rani-soft",
     cities: "Kolkata, Bhubaneswar, Guwahati, Patna",
     behavior: "Strong local-brand loyalty, price-sensitive entry, community dining.",
     format: "Emerging QSR category with real estate advantages.",
@@ -54,6 +74,10 @@ const REGIONS: Region[] = [
   {
     id: "central",
     name: "Central & Tier II/III",
+    hex: "#f0b429",
+    border: "border-turmeric",
+    bg: "bg-turmeric/10",
+    text: "text-turmeric",
     cities: "Indore, Nagpur, Bhopal, 100+ emerging towns",
     behavior: "Fastest-growing consumption class in the country.",
     format: "First-mover national brands win disproportionate share.",
@@ -66,15 +90,15 @@ export function IndiaComplexity() {
   const [active, setActive] = useState<Region>(REGIONS[0]);
 
   return (
-    <section className="relative bg-ink py-28 sm:py-40">
+    <section className="relative mesh-ink py-28 sm:py-40">
       <div className="mx-auto max-w-6xl px-6">
         <Reveal>
-          <span className="font-mono-label text-[11px] uppercase tracking-[0.35em] text-saffron">
+          <span className="font-mono-label text-[11px] uppercase tracking-[0.35em] text-turmeric-soft">
             Chapter Two
           </span>
         </Reveal>
         <Reveal delay={0.05}>
-          <h2 className="mt-4 max-w-3xl font-display text-3xl text-ivory sm:text-5xl text-balance">
+          <h2 className="mt-4 max-w-3xl font-display text-3xl font-bold text-ivory sm:text-5xl text-balance">
             India is not one market.
           </h2>
         </Reveal>
@@ -95,11 +119,15 @@ export function IndiaComplexity() {
                   onClick={() => setActive(region)}
                   className={`rounded-2xl border px-5 py-6 text-left transition ${
                     active.id === region.id
-                      ? "border-saffron bg-saffron/10"
+                      ? `${region.border} ${region.bg}`
                       : "border-ivory/10 hover:border-ivory/30"
                   }`}
                 >
-                  <span className="font-display text-lg text-ivory sm:text-xl">
+                  <span
+                    className={`font-display text-lg font-bold sm:text-xl ${
+                      active.id === region.id ? region.text : "text-ivory"
+                    }`}
+                  >
                     {region.name}
                   </span>
                   <span className="mt-2 block text-xs text-ivory-dim">
@@ -118,9 +146,9 @@ export function IndiaComplexity() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -12 }}
                 transition={{ duration: 0.35 }}
-                className="rounded-2xl border border-ivory/10 bg-charcoal-soft/60 p-8"
+                className={`rounded-2xl border bg-charcoal-soft/60 p-8 ${active.border}`}
               >
-                <h3 className="font-display text-2xl text-saffron-soft">
+                <h3 className={`font-display text-2xl font-bold ${active.text}`}>
                   {active.name}
                 </h3>
                 <dl className="mt-6 space-y-5">

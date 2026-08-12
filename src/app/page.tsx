@@ -1,4 +1,5 @@
 import { CurtainHero } from "@/components/sections/CurtainHero";
+import { PatternDivider } from "@/components/PatternDivider";
 import { IndiaCivilization } from "@/components/sections/IndiaCivilization";
 import { IndiaComplexity } from "@/components/sections/IndiaComplexity";
 import { PeciaNetworkSection } from "@/components/sections/PeciaNetworkSection";
@@ -30,6 +31,7 @@ export default function Home() {
   return (
     <main className="flex-1">
       <CurtainHero />
+      <PatternDivider className="bg-charcoal" />
       <IndiaCivilization />
       <IndiaComplexity />
       <PeciaNetworkSection />
@@ -55,6 +57,7 @@ export default function Home() {
       <WhatIf />
       <FutureOfFood />
       <FinalScene />
+      <PatternDivider className="bg-charcoal" flip />
       <ContactFooter />
     </main>
   );

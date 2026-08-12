@@ -1,6 +1,7 @@
 "use client";
 
 import { Reveal } from "@/components/Reveal";
+import { HUE_BORDER, HUE_TEXT, hue } from "@/lib/palette";
 
 const LAYERS = [
   "City Opportunity", "Category Trends", "Consumer Behavior", "Demographics",
@@ -10,15 +11,15 @@ const LAYERS = [
 
 export function PeciaIntelligence() {
   return (
-    <section className="relative bg-ink py-28 sm:py-40">
+    <section className="relative mesh-peacock py-28 sm:py-40">
       <div className="mx-auto max-w-5xl px-6">
         <Reveal>
-          <span className="font-mono-label text-[11px] uppercase tracking-[0.35em] text-saffron">
+          <span className="font-mono-label text-[11px] uppercase tracking-[0.35em] text-turmeric-soft">
             Pecia Intelligence
           </span>
         </Reveal>
         <Reveal delay={0.05}>
-          <h2 className="mt-4 max-w-2xl font-display text-3xl text-ivory sm:text-5xl text-balance">
+          <h2 className="mt-4 max-w-2xl font-display text-3xl font-bold text-ivory sm:text-5xl text-balance">
             India is too complex to navigate by instinct alone.
           </h2>
         </Reveal>
@@ -34,8 +35,8 @@ export function PeciaIntelligence() {
         <div className="mt-14 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
           {LAYERS.map((layer, i) => (
             <Reveal key={layer} delay={i * 0.02} y={12}>
-              <div className="rounded-xl border border-ivory/10 bg-charcoal-soft/50 px-4 py-4 text-center">
-                <span className="text-xs text-ivory">{layer}</span>
+              <div className={`rounded-xl border bg-charcoal-soft/60 px-4 py-4 text-center ${hue(HUE_BORDER, i)}`}>
+                <span className={`text-xs font-semibold ${hue(HUE_TEXT, i)}`}>{layer}</span>
               </div>
             </Reveal>
           ))}
@@ -49,7 +50,7 @@ export function PeciaIntelligence() {
             <p className="font-display text-lg text-ivory-dim sm:text-xl">
               Data tells you what is happening.
             </p>
-            <p className="font-display text-2xl text-saffron-soft sm:text-3xl">
+            <p className="font-display text-2xl font-bold text-turmeric-soft sm:text-3xl">
               Intelligence helps you decide what happens next.
             </p>
           </div>

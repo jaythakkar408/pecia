@@ -1,13 +1,14 @@
 "use client";
 
 import { Reveal } from "@/components/Reveal";
+import { HUE_BORDER, HUE_TEXT, hue } from "@/lib/palette";
 
 export function Thesis() {
   return (
-    <section className="relative bg-ink py-28 sm:py-40">
+    <section className="relative mesh-ink py-28 sm:py-40">
       <div className="mx-auto max-w-4xl px-6 text-center">
         <Reveal>
-          <span className="font-mono-label text-[11px] uppercase tracking-[0.35em] text-saffron">
+          <span className="font-mono-label text-[11px] uppercase tracking-[0.35em] text-turmeric-soft">
             The Pecia Thesis
           </span>
         </Reveal>
@@ -29,17 +30,17 @@ export function Thesis() {
 
         <div className="mx-auto mt-20 max-w-2xl space-y-8">
           <Reveal delay={0.15}>
-            <p className="font-display text-xl italic text-saffron-soft sm:text-2xl">
+            <p className="font-display text-xl font-bold text-saffron-soft sm:text-2xl">
               A great restaurant is not necessarily a great brand.
             </p>
           </Reveal>
           <Reveal delay={0.2}>
-            <p className="font-display text-xl italic text-spice sm:text-2xl">
+            <p className="font-display text-xl font-bold text-rani-soft sm:text-2xl">
               A great brand is not necessarily a scalable brand.
             </p>
           </Reveal>
           <Reveal delay={0.25}>
-            <p className="font-display text-xl italic text-copper sm:text-2xl">
+            <p className="font-display text-xl font-bold text-peacock-soft sm:text-2xl">
               Scale is not just more locations.
             </p>
           </Reveal>
@@ -51,15 +52,15 @@ export function Thesis() {
           </p>
         </Reveal>
         <Reveal delay={0.32}>
-          <div className="mt-6 flex flex-wrap justify-center gap-x-5 gap-y-3">
+          <div className="mt-6 flex flex-wrap justify-center gap-x-3 gap-y-3">
             {[
               "Brand", "Consumer Understanding", "Localization", "Operations",
               "Unit Economics", "People", "Technology", "Supply Chain",
               "Franchise Systems", "Market Intelligence", "Execution", "Discipline",
-            ].map((item) => (
+            ].map((item, i) => (
               <span
                 key={item}
-                className="rounded-full border border-ivory/15 px-4 py-1.5 text-xs text-ivory"
+                className={`rounded-full border px-4 py-1.5 text-xs ${hue(HUE_BORDER, i)} ${hue(HUE_TEXT, i)}`}
               >
                 {item}
               </span>
@@ -68,7 +69,7 @@ export function Thesis() {
         </Reveal>
 
         <Reveal delay={0.4}>
-          <p className="mt-20 font-display text-3xl text-ivory sm:text-5xl text-balance">
+          <p className="mt-20 font-display text-3xl font-bold text-ivory sm:text-5xl text-balance">
             Pecia exists at that intersection.
           </p>
         </Reveal>

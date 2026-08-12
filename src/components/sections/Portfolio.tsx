@@ -1,6 +1,7 @@
 "use client";
 
 import { Reveal } from "@/components/Reveal";
+import { HUE_BORDER, HUE_TEXT, hue } from "@/lib/palette";
 
 const CATEGORIES = [
   { label: "Brands We Build", note: "Proprietary or co-created brands." },
@@ -12,15 +13,15 @@ const CATEGORIES = [
 
 export function Portfolio() {
   return (
-    <section id="brands" className="relative bg-charcoal-soft py-28 sm:py-40">
+    <section id="brands" className="relative mesh-charcoal py-28 sm:py-40">
       <div className="mx-auto max-w-5xl px-6">
         <Reveal>
-          <span className="font-mono-label text-[11px] uppercase tracking-[0.35em] text-saffron">
+          <span className="font-mono-label text-[11px] uppercase tracking-[0.35em] text-turmeric-soft">
             Our Brands
           </span>
         </Reveal>
         <Reveal delay={0.05}>
-          <h2 className="mt-4 max-w-2xl font-display text-3xl text-ivory sm:text-5xl text-balance">
+          <h2 className="mt-4 max-w-2xl font-display text-3xl font-bold text-ivory sm:text-5xl text-balance">
             An architecture built to grow.
           </h2>
         </Reveal>
@@ -34,9 +35,9 @@ export function Portfolio() {
         <div className="mt-14 grid gap-4 sm:grid-cols-2">
           {CATEGORIES.map((cat, i) => (
             <Reveal key={cat.label} delay={i * 0.05} y={14}>
-              <div className="flex h-full flex-col justify-between rounded-2xl border border-dashed border-ivory/15 p-7">
+              <div className={`flex h-full flex-col justify-between rounded-2xl border border-dashed p-7 ${hue(HUE_BORDER, i)}`}>
                 <div>
-                  <h3 className="font-display text-xl text-ivory">
+                  <h3 className={`font-display text-xl font-bold ${hue(HUE_TEXT, i)}`}>
                     {cat.label}
                   </h3>
                   <p className="mt-2 text-sm text-ivory-dim">{cat.note}</p>

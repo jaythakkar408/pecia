@@ -1,6 +1,7 @@
 "use client";
 
 import { Reveal } from "@/components/Reveal";
+import { HUE_BORDER, HUE_TEXT, hue } from "@/lib/palette";
 
 const CONTEXTUAL_CTAS = [
   { q: "Bringing a brand to India?", a: "Let's build the entry strategy." },
@@ -13,10 +14,10 @@ const CONTEXTUAL_CTAS = [
 
 export function ContactFooter() {
   return (
-    <section id="contact" className="relative bg-charcoal py-28 sm:py-40">
+    <section id="contact" className="relative mesh-charcoal py-28 sm:py-40">
       <div className="mx-auto max-w-5xl px-6">
         <Reveal>
-          <h2 className="max-w-2xl font-display text-3xl text-ivory sm:text-5xl text-balance">
+          <h2 className="max-w-2xl font-display text-3xl font-bold text-ivory sm:text-5xl text-balance">
             What will you build with Pecia?
           </h2>
         </Reveal>
@@ -24,9 +25,9 @@ export function ContactFooter() {
         <div className="mt-14 grid gap-4 sm:grid-cols-2">
           {CONTEXTUAL_CTAS.map((cta, i) => (
             <Reveal key={cta.q} delay={i * 0.04} y={12}>
-              <div className="rounded-2xl border border-ivory/10 bg-ink/40 p-6">
-                <p className="font-display text-lg text-ivory">{cta.q}</p>
-                <p className="mt-1 text-sm text-saffron-soft">{cta.a}</p>
+              <div className={`rounded-2xl border bg-ink/40 p-6 ${hue(HUE_BORDER, i)}`}>
+                <p className="font-display text-lg font-bold text-ivory">{cta.q}</p>
+                <p className={`mt-1 text-sm ${hue(HUE_TEXT, i)}`}>{cta.a}</p>
               </div>
             </Reveal>
           ))}
@@ -36,13 +37,13 @@ export function ContactFooter() {
           <div className="mt-16 flex flex-col items-center gap-5 text-center">
             <a
               href="mailto:hello@peciafoodbrands.com"
-              className="rounded-full bg-saffron px-8 py-3 font-mono-label text-xs uppercase tracking-[0.25em] text-ink transition hover:bg-saffron-soft"
+              className="rounded-full bg-gradient-to-r from-saffron via-rani to-turmeric px-8 py-3 font-mono-label text-xs font-bold uppercase tracking-[0.25em] text-ink transition hover:opacity-90"
             >
               Build with Pecia →
             </a>
             <a
               href="mailto:hello@peciafoodbrands.com?subject=Entering%20India"
-              className="font-mono-label text-xs uppercase tracking-[0.25em] text-ivory-dim underline decoration-ivory/30 underline-offset-4 transition hover:text-saffron-soft"
+              className="font-mono-label text-xs uppercase tracking-[0.25em] text-ivory-dim underline decoration-ivory/30 underline-offset-4 transition hover:text-turmeric-soft"
             >
               Enter India with Pecia →
             </a>
