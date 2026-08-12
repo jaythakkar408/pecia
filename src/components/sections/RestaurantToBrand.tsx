@@ -1,7 +1,8 @@
 "use client";
 
 import { Reveal } from "@/components/Reveal";
-import { HUE_TEXT, hue } from "@/lib/palette";
+import { PulseLine } from "@/components/PulseLine";
+import { HUE_HEX, HUE_TEXT, hue } from "@/lib/palette";
 
 const TRANSFORM = [
   ["Recipe", "Product Architecture"],
@@ -36,7 +37,7 @@ export function RestaurantToBrand() {
             <Reveal key={pair[0]} delay={i * 0.03} y={12}>
               <div className="flex items-center justify-between gap-3 rounded-xl border border-ivory/10 bg-charcoal-soft/50 px-5 py-4">
                 <span className="text-sm text-ivory-dim">{pair[0]}</span>
-                <span className={hue(HUE_TEXT, i)} aria-hidden="true">→</span>
+                <PulseLine color={hue(HUE_HEX, i)} width={28} />
                 <span className={`text-sm font-bold ${hue(HUE_TEXT, i)}`}>{pair[1]}</span>
               </div>
             </Reveal>

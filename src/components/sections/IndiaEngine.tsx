@@ -1,8 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { Reveal } from "@/components/Reveal";
-import { HUE_BORDER, HUE_BG_SOFT, HUE_TEXT, hue } from "@/lib/palette";
 
 const NODES = [
   "Consumer", "Menu", "Pricing", "Location", "Operations",
@@ -10,8 +9,30 @@ const NODES = [
   "Expansion", "Brand Value",
 ];
 
+const HEX = ["#f4881d", "#d6236e", "#f0b429", "#0e8a72", "#e13a2a", "#4d52c4"];
+
+const CX = 250;
+const CY = 195;
+const RX = 220;
+const RY = 155;
+const K = 0.5523;
+
+const LOOP_PATH = `M ${CX + RX},${CY} C ${CX + RX},${CY + RY * K} ${CX + RX * K},${CY + RY} ${CX},${CY + RY} C ${CX - RX * K},${CY + RY} ${CX - RX},${CY + RY * K} ${CX - RX},${CY} C ${CX - RX},${CY - RY * K} ${CX - RX * K},${CY - RY} ${CX},${CY - RY} C ${CX + RX * K},${CY - RY} ${CX + RX},${CY - RY * K} ${CX + RX},${CY} Z`;
+
 export function IndiaEngine() {
   const [active, setActive] = useState<number | null>(null);
+
+  const points = useMemo(
+    () =>
+      NODES.map((_, i) => {
+        const angle = (i / NODES.length) * Math.PI * 2 - Math.PI / 2;
+        return {
+          x: CX + RX * Math.cos(angle),
+          y: CY + RY * Math.sin(angle),
+        };
+      }),
+    []
+  );
 
   return (
     <section className="relative mesh-charcoal py-28 sm:py-40">
@@ -23,42 +44,63 @@ export function IndiaEngine() {
         </Reveal>
         <Reveal delay={0.05}>
           <h2 className="mt-4 max-w-2xl font-display text-3xl font-bold text-ivory sm:text-5xl text-balance">
-            Food businesses are systems. Change one variable and the whole
-            system responds.
+            Food businesses are living systems. Change one variable and the
+            whole circulation responds.
           </h2>
         </Reveal>
 
         <Reveal delay={0.1}>
-          <div
-            className="mt-16 flex flex-wrap items-center justify-center gap-x-2 gap-y-4"
-            onMouseLeave={() => setActive(null)}
-          >
-            {NODES.map((node, i) => (
-              <div key={node} className="flex items-center gap-2">
+          <div className="relative mx-auto mt-16 aspect-[500/390] w-full max-w-xl">
+            <svg viewBox="0 0 500 390" className="absolute inset-0 h-full w-full" aria-hidden="true">
+              <defs>
+                <filter id="engineGlow" x="-50%" y="-50%" width="200%" height="200%">
+                  <feGaussianBlur stdDeviation="3" result="blur" />
+                  <feMerge>
+                    <feMergeNode in="blur" />
+                    <feMergeNode in="SourceGraphic" />
+                  </feMerge>
+                </filter>
+              </defs>
+              <path d={LOOP_PATH} fill="none" stroke="rgba(251,238,219,0.16)" strokeWidth="1.5" />
+              <circle r="5" fill="#ffd166" filter="url(#engineGlow)">
+                <animateMotion dur="10s" repeatCount="indefinite" path={LOOP_PATH} />
+              </circle>
+              <circle r="3.5" fill="#f4881d" opacity="0.75">
+                <animateMotion dur="10s" begin="-2.5s" repeatCount="indefinite" path={LOOP_PATH} />
+              </circle>
+              <circle r="3.5" fill="#d6236e" opacity="0.6">
+                <animateMotion dur="10s" begin="-5s" repeatCount="indefinite" path={LOOP_PATH} />
+              </circle>
+            </svg>
+
+            {NODES.map((node, i) => {
+              const p = points[i];
+              const color = HEX[i % HEX.length];
+              const isActive = active === i;
+              return (
                 <button
+                  key={node}
                   onMouseEnter={() => setActive(i)}
                   onFocus={() => setActive(i)}
-                  className={`rounded-full border px-4 py-2 text-sm font-semibold transition ${
-                    active === i
-                      ? `${hue(HUE_BORDER, i)} ${hue(HUE_BG_SOFT, i)} ${hue(HUE_TEXT, i)}`
-                      : "border-ivory/15 text-ivory hover:border-ivory/40"
-                  }`}
+                  onMouseLeave={() => setActive(null)}
+                  style={{
+                    left: `${(p.x / 500) * 100}%`,
+                    top: `${(p.y / 390) * 100}%`,
+                    borderColor: isActive ? color : "rgba(251,238,219,0.2)",
+                    color: isActive ? color : undefined,
+                    boxShadow: isActive ? `0 0 18px ${color}55` : "none",
+                  }}
+                  className="absolute -translate-x-1/2 -translate-y-1/2 whitespace-nowrap rounded-full border bg-ink/70 px-3 py-1.5 font-mono-label text-[10px] uppercase tracking-[0.1em] text-ivory transition sm:px-4 sm:py-2 sm:text-xs"
                 >
                   {node}
                 </button>
-                {i < NODES.length - 1 && (
-                  <span className="text-ivory-dim/60" aria-hidden="true">
-                    →
-                  </span>
-                )}
-              </div>
-            ))}
-            <span className="text-ivory-dim/60" aria-hidden="true">↺</span>
+              );
+            })}
           </div>
         </Reveal>
 
         <Reveal delay={0.15}>
-          <p className="mx-auto mt-10 max-w-md text-center text-sm text-ivory-dim">
+          <p className="mx-auto mt-8 max-w-md text-center text-sm text-ivory-dim">
             {active !== null
               ? `Shift ${NODES[active]}, and pricing, operations, unit economics and brand value all move with it.`
               : "Hover a variable to see how it ripples through the rest of the engine."}
@@ -66,7 +108,7 @@ export function IndiaEngine() {
         </Reveal>
 
         <Reveal delay={0.2}>
-          <p className="mt-16 text-center font-display text-2xl font-bold text-turmeric-soft sm:text-3xl">
+          <p className="mt-10 text-center font-display text-2xl font-bold text-turmeric-soft sm:text-3xl">
             Pecia understands the system.
           </p>
         </Reveal>

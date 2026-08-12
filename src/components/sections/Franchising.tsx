@@ -1,6 +1,7 @@
 "use client";
 
 import { Reveal } from "@/components/Reveal";
+import { PulseLine } from "@/components/PulseLine";
 import { HUE_BORDER, HUE_TEXT, hue } from "@/lib/palette";
 
 const PIECES = [
@@ -39,7 +40,7 @@ export function Franchising() {
         <Reveal delay={0.16}>
           <div className="mt-14 flex items-center justify-center gap-3 text-ink/70">
             <span className="font-display text-2xl font-bold">1 Restaurant</span>
-            <span className="text-spice">→</span>
+            <PulseLine color="#9c2318" width={40} />
             <span className="font-display text-2xl font-bold text-ink">Many Locations</span>
           </div>
         </Reveal>

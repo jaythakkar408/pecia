@@ -2,7 +2,8 @@
 
 import { Reveal } from "@/components/Reveal";
 import { Steam } from "@/components/Steam";
-import { HUE_BORDER, HUE_TEXT, hue } from "@/lib/palette";
+import { PulseLine } from "@/components/PulseLine";
+import { HUE_BORDER, HUE_HEX, HUE_TEXT, hue } from "@/lib/palette";
 
 const CHAIN = [
   "Recipe", "Concept", "Restaurant", "Brand",
@@ -75,9 +76,7 @@ export function NameStory() {
                   {step}
                 </span>
                 {i < CHAIN.length - 1 && (
-                  <span className="text-ivory-dim" aria-hidden="true">
-                    →
-                  </span>
+                  <PulseLine color={hue(HUE_HEX, i)} width={24} />
                 )}
               </div>
             ))}

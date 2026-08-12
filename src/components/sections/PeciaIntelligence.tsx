@@ -35,7 +35,12 @@ export function PeciaIntelligence() {
         <div className="mt-14 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
           {LAYERS.map((layer, i) => (
             <Reveal key={layer} delay={i * 0.02} y={12}>
-              <div className={`rounded-xl border bg-charcoal-soft/60 px-4 py-4 text-center ${hue(HUE_BORDER, i)}`}>
+              <div
+                className={`flex items-center justify-center gap-2 rounded-xl border bg-charcoal-soft/60 px-4 py-4 text-center transition-all duration-300 hover:-translate-y-1 hover:bg-charcoal-soft ${hue(HUE_BORDER, i)}`}
+              >
+                <span
+                  className={`h-1.5 w-1.5 shrink-0 animate-heartbeat rounded-full bg-current ${hue(HUE_TEXT, i)}`}
+                />
                 <span className={`text-xs font-semibold ${hue(HUE_TEXT, i)}`}>{layer}</span>
               </div>
             </Reveal>

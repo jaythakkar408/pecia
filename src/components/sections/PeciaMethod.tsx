@@ -38,7 +38,9 @@ export function PeciaMethod() {
         <div className="mt-16 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {STEPS.map((step, i) => (
             <Reveal key={step.label} delay={i * 0.05} y={16}>
-              <div className={`h-full rounded-2xl border-t-4 bg-ink/50 p-6 ${hue(HUE_BORDER, i)}`}>
+              <div
+                className={`h-full rounded-2xl border-t-4 bg-ink/50 p-6 transition-all duration-300 hover:-translate-y-1.5 hover:bg-ink/80 ${hue(HUE_BORDER, i)}`}
+              >
                 <span className={`font-mono-label text-xs font-bold ${hue(HUE_TEXT, i)}`}>
                   {String(i + 1).padStart(2, "0")}
                 </span>

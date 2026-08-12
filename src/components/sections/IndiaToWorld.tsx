@@ -1,6 +1,7 @@
 "use client";
 
 import { Reveal } from "@/components/Reveal";
+import { PulseLine } from "@/components/PulseLine";
 
 export function IndiaToWorld() {
   return (
@@ -20,13 +21,13 @@ export function IndiaToWorld() {
         <Reveal delay={0.1}>
           <div className="mt-16 flex flex-wrap items-center justify-center gap-3 font-display text-lg font-semibold text-ivory sm:text-2xl">
             <span>Indian Concept</span>
-            <span className="text-turmeric">→</span>
+            <PulseLine color="#f0b429" width={30} />
             <span>Build</span>
-            <span className="text-rani-soft">→</span>
+            <PulseLine color="#f0579c" width={30} />
             <span>Systemize</span>
-            <span className="text-peacock-soft">→</span>
+            <PulseLine color="#2bbf9e" width={30} />
             <span>Scale</span>
-            <span className="text-saffron">→</span>
+            <PulseLine color="#f4881d" width={30} />
             <span className="text-gradient-warm">Beyond India</span>
           </div>
         </Reveal>

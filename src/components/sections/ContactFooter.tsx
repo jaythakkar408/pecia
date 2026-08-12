@@ -25,10 +25,13 @@ export function ContactFooter() {
         <div className="mt-14 grid gap-4 sm:grid-cols-2">
           {CONTEXTUAL_CTAS.map((cta, i) => (
             <Reveal key={cta.q} delay={i * 0.04} y={12}>
-              <div className={`rounded-2xl border bg-ink/40 p-6 ${hue(HUE_BORDER, i)}`}>
+              <a
+                href={`mailto:hello@peciafoodbrands.com?subject=${encodeURIComponent(cta.q)}`}
+                className={`block rounded-2xl border bg-ink/40 p-6 transition-all duration-300 hover:-translate-y-1 hover:bg-ink/70 ${hue(HUE_BORDER, i)}`}
+              >
                 <p className="font-display text-lg font-bold text-ivory">{cta.q}</p>
-                <p className={`mt-1 text-sm ${hue(HUE_TEXT, i)}`}>{cta.a}</p>
-              </div>
+                <p className={`mt-1 text-sm ${hue(HUE_TEXT, i)}`}>{cta.a} →</p>
+              </a>
             </Reveal>
           ))}
         </div>

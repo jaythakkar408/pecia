@@ -1,7 +1,8 @@
 "use client";
 
 import { Reveal } from "@/components/Reveal";
-import { HUE_TEXT, hue } from "@/lib/palette";
+import { PulseLine } from "@/components/PulseLine";
+import { HUE_HEX, HUE_TEXT, hue } from "@/lib/palette";
 
 const FLOW = [
   ["Idea", "Market"],
@@ -59,7 +60,7 @@ export function CategoryPositioning() {
                 className="flex items-center justify-center gap-4 font-display text-lg font-semibold text-ivory sm:text-2xl"
               >
                 <span className="text-ivory-dim">{from}</span>
-                <span className={hue(HUE_TEXT, i)}>→</span>
+                <PulseLine color={hue(HUE_HEX, i)} width={36} />
                 <span>{to}</span>
               </div>
             ))}

@@ -1,7 +1,8 @@
 "use client";
 
 import { Reveal } from "@/components/Reveal";
-import { HUE_TEXT, hue } from "@/lib/palette";
+import { PulseLine } from "@/components/PulseLine";
+import { HUE_HEX, HUE_TEXT, hue } from "@/lib/palette";
 
 export function Capital() {
   return (
@@ -30,7 +31,9 @@ export function Capital() {
               (item, i, arr) => (
                 <span key={item} className={`flex items-center gap-4 ${hue(HUE_TEXT, i)}`}>
                   {item}
-                  {i < arr.length - 1 && <span className="text-ivory-dim">↔</span>}
+                  {i < arr.length - 1 && (
+                    <PulseLine color={hue(HUE_HEX, i)} width={28} bidirectional />
+                  )}
                 </span>
               )
             )}

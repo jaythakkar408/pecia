@@ -56,6 +56,18 @@ export const HUE_DOT = [
   "bg-indigo-soft",
 ];
 
+// Raw hex values in the same order as the HUE_* class arrays above, for
+// contexts that need an actual color value (inline SVG/canvas styles)
+// rather than a Tailwind class.
+export const HUE_HEX = [
+  "#ffab52", // saffron-soft
+  "#f0579c", // rani-soft
+  "#f0b429", // turmeric
+  "#2bbf9e", // peacock-soft
+  "#ff6b53", // spice-soft
+  "#4d52c4", // indigo-soft
+];
+
 export function hue(list: string[], i: number) {
   return list[i % list.length];
 }

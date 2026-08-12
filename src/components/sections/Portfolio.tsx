@@ -35,7 +35,9 @@ export function Portfolio() {
         <div className="mt-14 grid gap-4 sm:grid-cols-2">
           {CATEGORIES.map((cat, i) => (
             <Reveal key={cat.label} delay={i * 0.05} y={14}>
-              <div className={`flex h-full flex-col justify-between rounded-2xl border border-dashed p-7 ${hue(HUE_BORDER, i)}`}>
+              <div
+                className={`flex h-full flex-col justify-between rounded-2xl border border-dashed p-7 transition-all duration-300 hover:-translate-y-1 hover:border-solid hover:bg-ink/30 ${hue(HUE_BORDER, i)}`}
+              >
                 <div>
                   <h3 className={`font-display text-xl font-bold ${hue(HUE_TEXT, i)}`}>
                     {cat.label}
