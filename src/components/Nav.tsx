@@ -27,8 +27,10 @@ export function Nav() {
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 transition-colors duration-500 ${
-        solid ? "bg-ink/85 backdrop-blur-md" : "bg-transparent"
+      className={`fixed inset-x-0 top-0 z-50 border-b transition-all duration-500 ${
+        solid
+          ? "border-ivory/10 bg-ink/90 backdrop-blur-md shadow-[0_2px_20px_rgba(0,0,0,0.4)]"
+          : "border-ivory/5 bg-ink/50 backdrop-blur-sm"
       }`}
     >
       <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
@@ -44,7 +46,7 @@ export function Nav() {
             <Link
               key={link.href}
               href={link.href}
-              className="font-mono-label text-[11px] uppercase tracking-[0.2em] text-ivory-dim transition hover:text-ivory"
+              className="font-mono-label text-xs font-bold uppercase tracking-[0.2em] text-ivory transition hover:text-turmeric-soft"
             >
               {link.label}
             </Link>
@@ -55,7 +57,7 @@ export function Nav() {
           <button
             onClick={toggleMuted}
             aria-label={muted ? "Unmute sound" : "Mute sound"}
-            className="rounded-full border border-ivory/20 p-2 text-ivory-dim transition hover:border-saffron hover:text-saffron-soft"
+            className="rounded-full border border-ivory/30 p-2 text-ivory transition hover:border-saffron hover:text-saffron-soft"
           >
             {muted ? (
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -81,10 +83,13 @@ export function Nav() {
 
           <button
             onClick={() => setMenuOpen((o) => !o)}
-            className="rounded-full border border-ivory/20 p-2 text-ivory lg:hidden"
+            className="flex items-center gap-2 rounded-full border border-ivory/30 px-3 py-2 text-ivory transition hover:border-turmeric-soft lg:hidden"
             aria-label="Toggle menu"
             aria-expanded={menuOpen}
           >
+            <span className="font-mono-label text-[10px] font-bold uppercase tracking-[0.15em]">
+              {menuOpen ? "Close" : "Menu"}
+            </span>
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               {menuOpen ? (
                 <path d="M18 6 6 18M6 6l12 12" />
@@ -97,14 +102,14 @@ export function Nav() {
       </nav>
 
       {menuOpen && (
-        <div className="border-t border-ivory/10 bg-ink/95 px-6 py-6 lg:hidden">
-          <div className="flex flex-col gap-4">
+        <div className="border-t border-ivory/10 bg-ink/98 px-6 py-6 lg:hidden">
+          <div className="flex flex-col gap-5">
             {LINKS.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
                 onClick={() => setMenuOpen(false)}
-                className="font-mono-label text-xs uppercase tracking-[0.2em] text-ivory-dim"
+                className="font-display text-lg font-bold text-ivory transition hover:text-turmeric-soft"
               >
                 {link.label}
               </Link>

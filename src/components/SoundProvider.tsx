@@ -20,7 +20,7 @@ type SoundContextValue = {
 const SoundContext = createContext<SoundContextValue | null>(null);
 
 export function SoundProvider({ children }: { children: React.ReactNode }) {
-  const [muted, setMuted] = useState(true);
+  const [muted, setMuted] = useState(false);
   const ctxRef = useRef<AudioContext | null>(null);
 
   const ensureCtx = useCallback(() => {
@@ -105,6 +105,22 @@ export function SoundProvider({ children }: { children: React.ReactNode }) {
       ctxRef.current?.close();
     };
   }, []);
+
+  // Browsers only allow audio to start after a real user gesture — a click,
+  // tap or key press. Sound is on by default, so the very first gesture
+  // anywhere on the page (not necessarily the mute button) should unlock it.
+  useEffect(() => {
+    const events: Array<keyof WindowEventMap> = ["pointerdown", "touchstart", "keydown"];
+    const unlock = () => {
+      const ctx = ensureCtx();
+      if (ctx && ctx.state === "suspended") ctx.resume();
+      events.forEach((event) => window.removeEventListener(event, unlock));
+    };
+    events.forEach((event) => window.addEventListener(event, unlock, { passive: true }));
+    return () => {
+      events.forEach((event) => window.removeEventListener(event, unlock));
+    };
+  }, [ensureCtx]);
 
   return (
     <SoundContext.Provider value={{ muted, toggleMuted, pluck, tone, heartbeat }}>

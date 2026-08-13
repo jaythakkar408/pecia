@@ -150,7 +150,9 @@ export function PulseHero() {
       const x = e.clientX - rect.left;
       const y = e.clientY - rect.top;
       pointerRef.current = { x, y };
-      if (e.buttons > 0) triggerNear(x, y);
+      // Plucks on plain hover, not just click-and-drag — dragging still
+      // works too since a drag is a series of these same move events.
+      triggerNear(x, y);
     };
     const onPointerDown = (e: PointerEvent) => {
       const rect = canvas.getBoundingClientRect();
