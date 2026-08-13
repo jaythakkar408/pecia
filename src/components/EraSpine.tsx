@@ -70,16 +70,16 @@ export function EraSpine() {
 
       {/* Desktop: a vertical spine along the right edge. */}
       <div
-        className="pointer-events-none fixed right-4 top-1/2 z-40 hidden h-[62vh] w-px -translate-y-1/2 sm:block"
+        className="pointer-events-none fixed right-6 top-1/2 z-40 hidden h-[62vh] w-2.5 -translate-y-1/2 sm:block"
         aria-hidden="true"
       >
-        <div className="absolute inset-0 rounded-full bg-ink-strong/10" />
+        <div className="absolute inset-0 rounded-full bg-white/70 shadow-[0_0_0_1px_rgba(28,18,8,0.12)]" />
         <motion.div
-          className="absolute inset-0 rounded-full"
+          className="absolute inset-0 rounded-full shadow-[0_0_16px_2px_rgba(0,0,0,0.15)]"
           style={{ background: GRADIENT, clipPath: clipVertical }}
         />
         <motion.div
-          className={`absolute left-1/2 h-2.5 w-2.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-current shadow-[0_0_10px_currentColor] ${
+          className={`absolute left-1/2 h-5 w-5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-current shadow-[0_0_0_3px_white,0_0_14px_3px_currentColor] ${
             reducedMotion ? "" : "animate-heartbeat"
           }`}
           style={{ top: markerTop, color: ERA_STOPS.find((s) => s.name === eraName)?.hex }}
@@ -98,14 +98,14 @@ export function EraSpine() {
         </motion.div>
       </div>
 
-      {/* Mobile: a thin horizontal spine just beneath the nav bar. */}
+      {/* Mobile: a bold horizontal spine just beneath the nav bar. */}
       <div
-        className="pointer-events-none fixed inset-x-0 top-[67px] z-40 h-[3px] sm:hidden"
+        className="pointer-events-none fixed inset-x-0 top-[67px] z-40 h-2 sm:hidden"
         aria-hidden="true"
       >
-        <div className="absolute inset-0 bg-ink-strong/10" />
+        <div className="absolute inset-0 bg-white/70" />
         <motion.div
-          className="absolute inset-0"
+          className="absolute inset-0 shadow-[0_0_10px_1px_rgba(0,0,0,0.15)]"
           style={{ background: GRADIENT_HORIZONTAL, clipPath: clipHorizontal }}
         />
         <motion.div
