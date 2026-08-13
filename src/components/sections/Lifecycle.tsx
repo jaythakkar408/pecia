@@ -52,15 +52,15 @@ export function Lifecycle() {
   const pathD = useMemo(() => smoothPath(points), [points]);
 
   return (
-    <section className="relative mesh-charcoal py-28 sm:py-40">
+    <section className="relative paper-peacock py-28 sm:py-40">
       <div className="mx-auto max-w-6xl px-6">
         <Reveal>
-          <span className="font-mono-label text-[11px] uppercase tracking-[0.35em] text-turmeric-soft">
+          <span className="font-mono-label text-[11px] uppercase tracking-[0.35em] text-turmeric-deep">
             The Full Food Brand Lifecycle
           </span>
         </Reveal>
         <Reveal delay={0.05}>
-          <h2 className="mt-4 max-w-2xl font-display text-3xl font-bold text-ivory sm:text-5xl text-balance">
+          <h2 className="mt-4 max-w-2xl font-display text-3xl font-bold text-ink-strong sm:text-5xl text-balance">
             Pecia can participate at any stage. But the deeper work is a
             single, continuous lifeline.
           </h2>
@@ -103,10 +103,10 @@ export function Lifecycle() {
                   opacity="0.85"
                   filter="url(#lifelineGlow)"
                 />
-                <circle r="6" fill="#fbeedb" filter="url(#lifelineGlow)">
+                <circle r="6" fill="#1c1208" filter="url(#lifelineGlow)">
                   <animateMotion dur="9s" repeatCount="indefinite" path={pathD} />
                 </circle>
-                <circle r="4" fill="#ffd166" opacity="0.7">
+                <circle r="4" fill="#9c2318" opacity="0.8">
                   <animateMotion dur="9s" begin="-0.4s" repeatCount="indefinite" path={pathD} />
                 </circle>
               </svg>
@@ -145,11 +145,11 @@ export function Lifecycle() {
                       >
                         {String(i + 1).padStart(2, "0")}
                       </span>
-                      <h3 className="mt-0.5 font-display text-sm font-bold text-ivory sm:text-base">
+                      <h3 className="mt-0.5 font-display text-sm font-bold text-ink-strong sm:text-base">
                         {stage.label}
                       </h3>
                       {isActive && (
-                        <p className="mt-1 text-[11px] leading-snug text-ivory-dim">
+                        <p className="mt-1 text-[11px] leading-snug text-ink-soft">
                           {stage.note}
                         </p>
                       )}
@@ -162,7 +162,7 @@ export function Lifecycle() {
         </Reveal>
 
         <Reveal delay={0.2}>
-          <p className="mt-10 text-center font-display text-2xl font-bold text-turmeric-soft sm:text-3xl">
+          <p className="mt-10 text-center font-display text-2xl font-bold text-turmeric-deep sm:text-3xl">
             We don&rsquo;t just help brands open. We help them become.
           </p>
         </Reveal>

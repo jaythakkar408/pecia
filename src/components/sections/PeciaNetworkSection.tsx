@@ -2,7 +2,7 @@
 
 import { Reveal } from "@/components/Reveal";
 import { NetworkConverge } from "@/components/NetworkConverge";
-import { HUE_TEXT, hue } from "@/lib/palette";
+import { HUE_TEXT_DEEP, hue } from "@/lib/palette";
 
 const NODES = [
   "Consumers", "Brands", "Restaurants", "Franchisees", "Operators",
@@ -12,10 +12,10 @@ const NODES = [
 
 export function PeciaNetworkSection() {
   return (
-    <section className="relative mesh-charcoal py-28 sm:py-40">
+    <section className="relative paper py-28 sm:py-40">
       <div className="mx-auto max-w-6xl px-6">
         <Reveal>
-          <p className="max-w-2xl font-display text-2xl font-bold text-ivory sm:text-4xl text-balance">
+          <p className="max-w-2xl font-display text-2xl font-bold text-ink-strong sm:text-4xl text-balance">
             One country. Many food cultures. Millions of consumers. Thousands
             of markets — and a growing web connecting all of them.
           </p>
@@ -36,7 +36,7 @@ export function PeciaNetworkSection() {
             {NODES.map((node, i) => (
               <span
                 key={node}
-                className={`font-mono-label text-xs uppercase tracking-[0.2em] ${hue(HUE_TEXT, i)}`}
+                className={`font-mono-label text-xs uppercase tracking-[0.2em] ${hue(HUE_TEXT_DEEP, i)}`}
               >
                 {node}
               </span>
@@ -44,7 +44,7 @@ export function PeciaNetworkSection() {
           </div>
         </Reveal>
         <Reveal delay={0.2}>
-          <h3 className="mt-16 text-center font-display text-3xl font-bold text-gradient-warm sm:text-5xl text-balance">
+          <h3 className="mt-16 text-center font-display text-3xl font-bold text-gradient-deep sm:text-5xl text-balance">
             Pecia is the connective tissue of food brand growth.
           </h3>
         </Reveal>

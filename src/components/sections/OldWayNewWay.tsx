@@ -18,28 +18,28 @@ const PECIA_WAY = [
 
 export function OldWayNewWay() {
   return (
-    <section className="relative mesh-charcoal py-28 sm:py-40">
+    <section className="relative paper-indigo py-28 sm:py-40">
       <div className="mx-auto max-w-5xl px-6">
         <Reveal>
-          <span className="font-mono-label text-[11px] uppercase tracking-[0.35em] text-turmeric-soft">
+          <span className="font-mono-label text-[11px] uppercase tracking-[0.35em] text-turmeric-deep">
             The Difference
           </span>
         </Reveal>
         <Reveal delay={0.05}>
-          <h2 className="mt-4 font-display text-3xl font-bold text-ivory sm:text-5xl text-balance">
+          <h2 className="mt-4 font-display text-3xl font-bold text-ink-strong sm:text-5xl text-balance">
             The old way vs. the Pecia way.
           </h2>
         </Reveal>
 
         <div className="mt-14 grid gap-6 sm:grid-cols-2">
           <Reveal delay={0.1}>
-            <div className="h-full rounded-2xl border border-ivory/10 bg-ink/40 p-8 opacity-70">
-              <h3 className="font-mono-label text-xs uppercase tracking-[0.25em] text-ivory-dim">
+            <div className="h-full rounded-2xl border border-ink-strong/12 bg-white/50 p-8 opacity-70">
+              <h3 className="font-mono-label text-xs uppercase tracking-[0.25em] text-ink-soft">
                 The Old Way
               </h3>
               <ol className="mt-6 space-y-3">
                 {OLD_WAY.map((step, i) => (
-                  <li key={step} className="flex items-center gap-3 text-ivory-dim">
+                  <li key={step} className="flex items-center gap-3 text-ink-soft">
                     <span className="font-mono-label text-xs">
                       {String(i + 1).padStart(2, "0")}
                     </span>

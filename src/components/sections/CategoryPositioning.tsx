@@ -2,7 +2,7 @@
 
 import { Reveal } from "@/components/Reveal";
 import { PulseLine } from "@/components/PulseLine";
-import { HUE_HEX, HUE_TEXT, hue } from "@/lib/palette";
+import { HUE_HEX, HUE_TEXT_DEEP, hue } from "@/lib/palette";
 
 const FLOW = [
   ["Idea", "Market"],
@@ -15,15 +15,15 @@ const FLOW = [
 
 export function CategoryPositioning() {
   return (
-    <section className="relative mesh-ink py-28 sm:py-40">
+    <section className="relative paper py-28 sm:py-40">
       <div className="mx-auto max-w-4xl px-6 text-center">
         <Reveal>
-          <p className="font-display text-xl text-ivory-dim sm:text-2xl">
+          <p className="font-display text-xl text-ink-soft sm:text-2xl">
             Pecia is not a food consultancy.
           </p>
         </Reveal>
         <Reveal delay={0.06}>
-          <h2 className="mt-4 font-display text-3xl font-bold text-ivory sm:text-5xl text-balance">
+          <h2 className="mt-4 font-display text-3xl font-bold text-ink-strong sm:text-5xl text-balance">
             Pecia is building a new category —
             <br className="hidden sm:block" /> a food-brand growth and
             operating platform for India.
@@ -36,7 +36,7 @@ export function CategoryPositioning() {
               (item, i) => (
                 <span
                   key={item}
-                  className={`rounded-full border border-ivory/10 bg-ink/40 px-3 py-1 font-mono-label text-xs uppercase tracking-[0.2em] ${hue(HUE_TEXT, i)}`}
+                  className={`rounded-full border border-ink-strong/10 bg-white/70 px-3 py-1 font-mono-label text-xs uppercase tracking-[0.2em] ${hue(HUE_TEXT_DEEP, i)}`}
                 >
                   {item}
                 </span>
@@ -46,7 +46,7 @@ export function CategoryPositioning() {
         </Reveal>
 
         <Reveal delay={0.18}>
-          <p className="mt-16 max-w-xl mx-auto text-ivory-dim">
+          <p className="mt-16 max-w-xl mx-auto text-ink-soft">
             Pecia doesn&rsquo;t just advise food brands. Pecia helps food
             brands move.
           </p>
@@ -57,9 +57,9 @@ export function CategoryPositioning() {
             {FLOW.map(([from, to], i) => (
               <div
                 key={`${from}-${to}`}
-                className="flex items-center justify-center gap-4 font-display text-lg font-semibold text-ivory sm:text-2xl"
+                className="flex items-center justify-center gap-4 font-display text-lg font-semibold text-ink-strong sm:text-2xl"
               >
-                <span className="text-ivory-dim">{from}</span>
+                <span className="text-ink-soft">{from}</span>
                 <PulseLine color={hue(HUE_HEX, i)} width={36} />
                 <span>{to}</span>
               </div>
@@ -68,7 +68,7 @@ export function CategoryPositioning() {
         </Reveal>
 
         <Reveal delay={0.3}>
-          <p className="mt-16 font-display text-2xl font-bold text-turmeric-soft sm:text-3xl">
+          <p className="mt-16 font-display text-2xl font-bold text-turmeric-deep sm:text-3xl">
             We don&rsquo;t just help brands open. We help them become.
           </p>
         </Reveal>

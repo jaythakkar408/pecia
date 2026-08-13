@@ -1,7 +1,7 @@
 "use client";
 
 import { Reveal } from "@/components/Reveal";
-import { HUE_BORDER, HUE_TEXT, hue } from "@/lib/palette";
+import { HUE_BORDER, HUE_TEXT_DEEP, hue } from "@/lib/palette";
 
 const CONTEXTUAL_CTAS = [
   { q: "Bringing a brand to India?", a: "Let's build the entry strategy." },
@@ -14,10 +14,10 @@ const CONTEXTUAL_CTAS = [
 
 export function ContactFooter() {
   return (
-    <section id="contact" className="relative mesh-charcoal py-28 sm:py-40">
+    <section id="contact" className="relative paper-deep py-28 sm:py-40">
       <div className="mx-auto max-w-5xl px-6">
         <Reveal>
-          <h2 className="max-w-2xl font-display text-3xl font-bold text-ivory sm:text-5xl text-balance">
+          <h2 className="max-w-2xl font-display text-3xl font-bold text-ink-strong sm:text-5xl text-balance">
             What will you build with Pecia?
           </h2>
         </Reveal>
@@ -27,10 +27,10 @@ export function ContactFooter() {
             <Reveal key={cta.q} delay={i * 0.04} y={12}>
               <a
                 href={`mailto:hello@peciafoodbrands.com?subject=${encodeURIComponent(cta.q)}`}
-                className={`block rounded-2xl border bg-ink/40 p-6 transition-all duration-300 hover:-translate-y-1 hover:bg-ink/70 ${hue(HUE_BORDER, i)}`}
+                className={`block rounded-2xl border bg-white/70 p-6 transition-all duration-300 hover:-translate-y-1 hover:bg-white ${hue(HUE_BORDER, i)}`}
               >
-                <p className="font-display text-lg font-bold text-ivory">{cta.q}</p>
-                <p className={`mt-1 text-sm ${hue(HUE_TEXT, i)}`}>{cta.a} →</p>
+                <p className="font-display text-lg font-bold text-ink-strong">{cta.q}</p>
+                <p className={`mt-1 text-sm ${hue(HUE_TEXT_DEEP, i)}`}>{cta.a} →</p>
               </a>
             </Reveal>
           ))}
@@ -46,7 +46,7 @@ export function ContactFooter() {
             </a>
             <a
               href="mailto:hello@peciafoodbrands.com?subject=Entering%20India"
-              className="font-mono-label text-xs uppercase tracking-[0.25em] text-ivory-dim underline decoration-ivory/30 underline-offset-4 transition hover:text-turmeric-soft"
+              className="font-mono-label text-xs uppercase tracking-[0.25em] text-ink-soft underline decoration-ink-strong/25 underline-offset-4 transition hover:text-turmeric-deep"
             >
               Enter India with Pecia →
             </a>
@@ -54,15 +54,15 @@ export function ContactFooter() {
         </Reveal>
       </div>
 
-      <div className="mx-auto mt-28 max-w-5xl border-t border-ivory/10 px-6 pt-10">
+      <div className="mx-auto mt-28 max-w-5xl border-t border-ink-strong/12 px-6 pt-10">
         <div className="flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-center">
           <div>
-            <p className="font-display text-lg text-ivory">Pecia Food Brands Private Limited</p>
-            <p className="mt-1 text-xs uppercase tracking-[0.2em] text-ivory-dim">
+            <p className="font-display text-lg text-ink-strong">Pecia Food Brands Private Limited</p>
+            <p className="mt-1 text-xs uppercase tracking-[0.2em] text-ink-soft">
               Building India&rsquo;s Next Generation of Food Brands
             </p>
           </div>
-          <p className="text-xs text-ivory-dim">
+          <p className="text-xs text-ink-soft">
             © {new Date().getFullYear()} Pecia Food Brands Private Limited. All rights reserved.
           </p>
         </div>

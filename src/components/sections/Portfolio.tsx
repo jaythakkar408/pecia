@@ -1,7 +1,7 @@
 "use client";
 
 import { Reveal } from "@/components/Reveal";
-import { HUE_BORDER, HUE_TEXT, hue } from "@/lib/palette";
+import { HUE_BORDER, HUE_TEXT_DEEP, hue } from "@/lib/palette";
 
 const CATEGORIES = [
   { label: "Brands We Build", note: "Proprietary or co-created brands." },
@@ -13,20 +13,20 @@ const CATEGORIES = [
 
 export function Portfolio() {
   return (
-    <section id="brands" className="relative mesh-charcoal py-28 sm:py-40">
+    <section id="brands" className="relative paper-deep py-28 sm:py-40">
       <div className="mx-auto max-w-5xl px-6">
         <Reveal>
-          <span className="font-mono-label text-[11px] uppercase tracking-[0.35em] text-turmeric-soft">
+          <span className="font-mono-label text-[11px] uppercase tracking-[0.35em] text-turmeric-deep">
             Our Brands
           </span>
         </Reveal>
         <Reveal delay={0.05}>
-          <h2 className="mt-4 max-w-2xl font-display text-3xl font-bold text-ivory sm:text-5xl text-balance">
+          <h2 className="mt-4 max-w-2xl font-display text-3xl font-bold text-ink-strong sm:text-5xl text-balance">
             An architecture built to grow.
           </h2>
         </Reveal>
         <Reveal delay={0.08}>
-          <p className="mt-4 max-w-xl text-ivory-dim">
+          <p className="mt-4 max-w-xl text-ink-soft">
             Pecia is early. This is the structure our portfolio will fill as
             partnerships close — five ways a brand can work with us.
           </p>
@@ -36,13 +36,13 @@ export function Portfolio() {
           {CATEGORIES.map((cat, i) => (
             <Reveal key={cat.label} delay={i * 0.05} y={14}>
               <div
-                className={`flex h-full flex-col justify-between rounded-2xl border border-dashed p-7 transition-all duration-300 hover:-translate-y-1 hover:border-solid hover:bg-ink/30 ${hue(HUE_BORDER, i)}`}
+                className={`flex h-full flex-col justify-between rounded-2xl border border-dashed p-7 transition-all duration-300 hover:-translate-y-1 hover:border-solid hover:bg-white/70 ${hue(HUE_BORDER, i)}`}
               >
                 <div>
-                  <h3 className={`font-display text-xl font-bold ${hue(HUE_TEXT, i)}`}>
+                  <h3 className={`font-display text-xl font-bold ${hue(HUE_TEXT_DEEP, i)}`}>
                     {cat.label}
                   </h3>
-                  <p className="mt-2 text-sm text-ivory-dim">{cat.note}</p>
+                  <p className="mt-2 text-sm text-ink-soft">{cat.note}</p>
                 </div>
                 <span className="mt-6 font-mono-label text-[10px] uppercase tracking-[0.25em] text-copper">
                   This could be you →

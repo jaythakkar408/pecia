@@ -3,7 +3,7 @@
 import { useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import { Reveal } from "@/components/Reveal";
-import { HUE_BG_SOFT, HUE_BORDER, HUE_TEXT, hue } from "@/lib/palette";
+import { HUE_BG_SOFT, HUE_BORDER, HUE_TEXT_DEEP, hue } from "@/lib/palette";
 
 const HEX = ["#f4881d", "#d6236e", "#f0b429", "#0e8a72", "#e13a2a", "#4d52c4"];
 
@@ -38,15 +38,15 @@ export function CapabilityEcosystem() {
   );
 
   return (
-    <section id="what-we-do" className="relative mesh-indigo py-28 sm:py-40">
+    <section id="what-we-do" className="relative paper-indigo py-28 sm:py-40">
       <div className="mx-auto max-w-6xl px-6">
         <Reveal>
-          <span className="font-mono-label text-[11px] uppercase tracking-[0.35em] text-turmeric-soft">
+          <span className="font-mono-label text-[11px] uppercase tracking-[0.35em] text-turmeric-deep">
             The Capability Ecosystem
           </span>
         </Reveal>
         <Reveal delay={0.05}>
-          <h2 className="mt-4 max-w-2xl font-display text-3xl font-bold text-ivory sm:text-5xl text-balance">
+          <h2 className="mt-4 max-w-2xl font-display text-3xl font-bold text-ink-strong sm:text-5xl text-balance">
             Pecia&rsquo;s advantage isn&rsquo;t one service. It&rsquo;s the
             system.
           </h2>
@@ -72,8 +72,8 @@ export function CapabilityEcosystem() {
               <circle cx="50" cy="50" r="46" fill="none" stroke="rgba(240,180,41,0.25)" strokeWidth="0.3" strokeDasharray="0.6 2.4" />
             </motion.svg>
             <svg className="absolute inset-0 h-full w-full" viewBox="0 0 100 100" aria-hidden="true">
-              <circle cx="50" cy="50" r="38" fill="none" stroke="rgba(251,238,219,0.08)" strokeWidth="0.3" />
-              <circle cx="50" cy="50" r="16" fill="none" stroke="rgba(251,238,219,0.1)" strokeWidth="0.3" />
+              <circle cx="50" cy="50" r="38" fill="none" stroke="rgba(28,18,8,0.08)" strokeWidth="0.3" />
+              <circle cx="50" cy="50" r="16" fill="none" stroke="rgba(28,18,8,0.1)" strokeWidth="0.3" />
             </svg>
             <svg
               className="absolute inset-0 h-full w-full"
@@ -87,7 +87,7 @@ export function CapabilityEcosystem() {
                   y1={50}
                   x2={p.x}
                   y2={p.y}
-                  stroke={i === active ? HEX[i % HEX.length] : "rgba(251,238,219,0.14)"}
+                  stroke={i === active ? HEX[i % HEX.length] : "rgba(28,18,8,0.14)"}
                   strokeWidth={i === active ? 0.6 : 0.3}
                 />
               ))}
@@ -110,8 +110,8 @@ export function CapabilityEcosystem() {
                 }}
                 className={`absolute -translate-x-1/2 -translate-y-1/2 rounded-full border px-2.5 py-1.5 font-mono-label text-[9px] uppercase tracking-[0.12em] transition sm:px-3 sm:py-2 sm:text-[10px] ${
                   i === active
-                    ? `${hue(HUE_BORDER, i)} ${hue(HUE_BG_SOFT, i)} ${hue(HUE_TEXT, i)} border-opacity-100`
-                    : "border-ivory/20 bg-ink/40 text-ivory-dim hover:border-ivory/40"
+                    ? `${hue(HUE_BORDER, i)} ${hue(HUE_BG_SOFT, i)} ${hue(HUE_TEXT_DEEP, i)} border-opacity-100`
+                    : "border-ink-strong/15 bg-white/70 text-ink-soft hover:border-ink-strong/35"
                 }`}
               >
                 {cap.label}
@@ -122,10 +122,10 @@ export function CapabilityEcosystem() {
 
         <Reveal delay={0.15}>
           <div className="mx-auto mt-10 max-w-md text-center">
-            <h3 className={`font-display text-2xl font-bold ${hue(HUE_TEXT, active)}`}>
+            <h3 className={`font-display text-2xl font-bold ${hue(HUE_TEXT_DEEP, active)}`}>
               {CAPABILITIES[active].label}
             </h3>
-            <p className="mt-2 text-sm text-ivory-dim">
+            <p className="mt-2 text-sm text-ink-soft">
               {CAPABILITIES[active].note}
             </p>
           </div>

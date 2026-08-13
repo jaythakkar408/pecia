@@ -21,6 +21,7 @@ export function FinalScene() {
             word="PECIA"
             particleCount={520}
             className="mx-auto h-[42vh] w-full max-w-3xl sm:h-[50vh]"
+            dark
           />
         </Reveal>
 

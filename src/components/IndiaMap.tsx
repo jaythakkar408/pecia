@@ -90,7 +90,7 @@ export function IndiaMap({
                       y={city.y - 3.2}
                       textAnchor="middle"
                       fontSize="2.6"
-                      fill="#fbeedb"
+                      fill="#1c1208"
                       fontFamily="var(--font-mono), monospace"
                       opacity={0.85}
                     >
@@ -111,7 +111,7 @@ export function IndiaMap({
         transition={{ duration: 0.4 }}
         className="pointer-events-none absolute inset-0 flex items-end justify-center pb-1"
       >
-        <span className="font-mono-label text-[9px] uppercase tracking-[0.25em] text-ivory-dim/50">
+        <span className="font-mono-label text-[9px] uppercase tracking-[0.25em] text-ink-soft/70">
           A network, not a survey map
         </span>
       </motion.div>

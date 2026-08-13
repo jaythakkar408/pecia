@@ -4,7 +4,7 @@ import { useRef } from "react";
 import { motion, useScroll, useSpring } from "framer-motion";
 import { Reveal } from "@/components/Reveal";
 import { Flame } from "@/components/Flame";
-import { HUE_DOT, HUE_TEXT, hue } from "@/lib/palette";
+import { HUE_DOT, HUE_TEXT_DEEP, hue } from "@/lib/palette";
 
 const CIVILIZATION_MARKS = [
   "Fire", "Clay", "Grain", "Spice Routes", "Open Markets",
@@ -32,15 +32,15 @@ export function IndiaCivilization() {
   const drawProgress = useSpring(scrollYProgress, { stiffness: 90, damping: 24 });
 
   return (
-    <section id="india" className="relative mesh-charcoal py-28 sm:py-40">
+    <section id="india" className="relative paper-deep py-28 sm:py-40">
       <div className="mx-auto max-w-6xl px-6">
         <Reveal>
-          <span className="font-mono-label text-[11px] uppercase tracking-[0.35em] text-turmeric-soft">
+          <span className="font-mono-label text-[11px] uppercase tracking-[0.35em] text-turmeric-deep">
             Chapter One
           </span>
         </Reveal>
         <Reveal delay={0.05}>
-          <h2 className="mt-4 max-w-3xl font-display text-3xl font-bold text-ivory sm:text-5xl text-balance">
+          <h2 className="mt-4 max-w-3xl font-display text-3xl font-bold text-ink-strong sm:text-5xl text-balance">
             India has always been a living food civilization.
           </h2>
         </Reveal>
@@ -50,7 +50,7 @@ export function IndiaCivilization() {
             {CIVILIZATION_MARKS.map((mark, i) => (
               <span
                 key={mark}
-                className={`rounded-full border border-ivory/10 bg-ink/40 px-3 py-1 font-mono-label text-xs uppercase tracking-[0.2em] ${hue(HUE_TEXT, i)}`}
+                className={`rounded-full border border-ink-strong/10 bg-white/70 px-3 py-1 font-mono-label text-xs uppercase tracking-[0.2em] ${hue(HUE_TEXT_DEEP, i)}`}
               >
                 {mark}
               </span>
@@ -60,17 +60,17 @@ export function IndiaCivilization() {
 
         <div className="mt-28 space-y-10 text-center">
           <Reveal>
-            <p className="font-display text-4xl font-extrabold uppercase text-turmeric-soft sm:text-6xl">
+            <p className="font-display text-4xl font-extrabold uppercase text-turmeric-deep sm:text-6xl">
               Food evolves.
             </p>
           </Reveal>
           <Reveal>
-            <p className="font-display text-4xl font-extrabold uppercase text-rani-soft sm:text-6xl">
+            <p className="font-display text-4xl font-extrabold uppercase text-rani-deep sm:text-6xl">
               India evolves.
             </p>
           </Reveal>
           <Reveal>
-            <p className="font-display text-4xl font-extrabold text-ivory sm:text-6xl text-balance">
+            <p className="font-display text-4xl font-extrabold text-ink-strong sm:text-6xl text-balance">
               Brands must evolve with it.
             </p>
           </Reveal>
@@ -78,7 +78,7 @@ export function IndiaCivilization() {
 
         <div ref={timelineRef} className="relative mt-28">
           <div
-            className="absolute left-4 top-2 bottom-2 w-px bg-ivory/10 sm:left-1/2"
+            className="absolute left-4 top-2 bottom-2 w-px bg-ink-strong/10 sm:left-1/2"
             aria-hidden="true"
           />
           <motion.div
@@ -116,10 +116,10 @@ export function IndiaCivilization() {
                         {step.era}
                       </span>
                     )}
-                    <h3 className={`mt-1 font-display text-xl font-bold sm:text-2xl ${hue(HUE_TEXT, i)}`}>
+                    <h3 className={`mt-1 font-display text-xl font-bold sm:text-2xl ${hue(HUE_TEXT_DEEP, i)}`}>
                       {step.label}
                     </h3>
-                    <p className="mt-1 text-sm text-ivory-dim">{step.note}</p>
+                    <p className="mt-1 text-sm text-ink-soft">{step.note}</p>
                   </div>
                 </div>
               </Reveal>

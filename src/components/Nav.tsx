@@ -29,14 +29,14 @@ export function Nav() {
     <header
       className={`fixed inset-x-0 top-0 z-50 border-b transition-all duration-500 ${
         solid
-          ? "border-ivory/10 bg-ink/90 backdrop-blur-md shadow-[0_2px_20px_rgba(0,0,0,0.4)]"
-          : "border-ivory/5 bg-ink/50 backdrop-blur-sm"
+          ? "border-paper-line bg-paper/95 backdrop-blur-md shadow-[0_2px_20px_rgba(28,18,8,0.08)]"
+          : "border-paper-line/60 bg-paper/70 backdrop-blur-sm"
       }`}
     >
       <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
         <Link
           href="#story"
-          className="font-display text-lg tracking-wide text-ivory"
+          className="font-display text-lg tracking-wide text-ink-strong"
         >
           PECIA
         </Link>
@@ -46,7 +46,7 @@ export function Nav() {
             <Link
               key={link.href}
               href={link.href}
-              className="font-mono-label text-xs font-bold uppercase tracking-[0.2em] text-ivory transition hover:text-turmeric-soft"
+              className="font-mono-label text-xs font-bold uppercase tracking-[0.2em] text-ink-strong transition hover:text-spice-deep"
             >
               {link.label}
             </Link>
@@ -57,7 +57,7 @@ export function Nav() {
           <button
             onClick={toggleMuted}
             aria-label={muted ? "Unmute sound" : "Mute sound"}
-            className="rounded-full border border-ivory/30 p-2 text-ivory transition hover:border-saffron hover:text-saffron-soft"
+            className="rounded-full border border-ink-strong/25 p-2 text-ink-strong transition hover:border-saffron-deep hover:text-saffron-deep"
           >
             {muted ? (
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -83,7 +83,7 @@ export function Nav() {
 
           <button
             onClick={() => setMenuOpen((o) => !o)}
-            className="flex items-center gap-2 rounded-full border border-ivory/30 px-3 py-2 text-ivory transition hover:border-turmeric-soft lg:hidden"
+            className="flex items-center gap-2 rounded-full border border-ink-strong/25 px-3 py-2 text-ink-strong transition hover:border-spice-deep lg:hidden"
             aria-label="Toggle menu"
             aria-expanded={menuOpen}
           >
@@ -102,14 +102,14 @@ export function Nav() {
       </nav>
 
       {menuOpen && (
-        <div className="border-t border-ivory/10 bg-ink/98 px-6 py-6 lg:hidden">
+        <div className="border-t border-paper-line bg-paper px-6 py-6 lg:hidden">
           <div className="flex flex-col gap-5">
             {LINKS.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
                 onClick={() => setMenuOpen(false)}
-                className="font-display text-lg font-bold text-ivory transition hover:text-turmeric-soft"
+                className="font-display text-lg font-bold text-ink-strong transition hover:text-spice-deep"
               >
                 {link.label}
               </Link>

@@ -59,11 +59,13 @@ export function NetworkConverge({
   particleCount = 420,
   className,
   caption,
+  dark = false,
 }: {
   word?: string;
   particleCount?: number;
   className?: string;
   caption?: string;
+  dark?: boolean;
 }) {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
@@ -145,7 +147,9 @@ export function NetworkConverge({
       }
 
       if (!target) {
-        ctx.strokeStyle = "rgba(244, 236, 220, 0.06)";
+        ctx.strokeStyle = dark
+          ? "rgba(244, 236, 220, 0.06)"
+          : "rgba(28, 18, 8, 0.06)";
         ctx.lineWidth = 1;
         for (let i = 0; i < particles.length; i++) {
           for (let j = i + 1; j < particles.length; j++) {
@@ -182,14 +186,14 @@ export function NetworkConverge({
       observer.disconnect();
       if (rafRef.current) cancelAnimationFrame(rafRef.current);
     };
-  }, [word, particleCount, reducedMotion]);
+  }, [word, particleCount, reducedMotion, dark]);
 
   return (
     <div ref={containerRef} className={`relative ${className ?? ""}`}>
       <canvas ref={canvasRef} className="absolute inset-0 h-full w-full" />
       {caption && (
         <div
-          className={`pointer-events-none absolute inset-x-0 bottom-4 text-center font-mono-label text-[11px] uppercase tracking-[0.3em] text-ivory-dim transition-opacity duration-700 ${
+          className={`pointer-events-none absolute inset-x-0 bottom-4 text-center font-mono-label text-[11px] uppercase tracking-[0.3em] ${dark ? "text-ivory-dim" : "text-ink-soft"} transition-opacity duration-700 ${
             converged ? "opacity-100" : "opacity-0"
           }`}
         >

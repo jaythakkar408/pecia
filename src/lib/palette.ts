@@ -68,6 +68,36 @@ export const HUE_HEX = [
   "#4d52c4", // indigo-soft
 ];
 
+// AA-contrast-safe deep hues for text on the light "paper" backgrounds.
+// The bright variants above stay reserved for dark backgrounds (PulseHero,
+// PulseStatement, FinalScene) where they read fine against ink.
+export const HUE_TEXT_DEEP = [
+  "text-saffron-deep",
+  "text-rani-deep",
+  "text-turmeric-deep",
+  "text-peacock-deep",
+  "text-spice-deep",
+  "text-indigo-deep",
+];
+
+export const HUE_BORDER_DEEP = [
+  "border-saffron-deep/30",
+  "border-rani-deep/30",
+  "border-turmeric-deep/30",
+  "border-peacock-deep/30",
+  "border-spice-deep/30",
+  "border-indigo-deep/30",
+];
+
+export const HUE_HEX_DEEP = [
+  "#a85c10", // saffron-deep
+  "#9c1456", // rani-deep
+  "#86620f", // turmeric-deep
+  "#0b5f4d", // peacock-deep
+  "#9c2318", // spice-deep
+  "#33367a", // indigo-deep
+];
+
 export function hue(list: string[], i: number) {
   return list[i % list.length];
 }

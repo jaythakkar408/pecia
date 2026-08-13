@@ -24,8 +24,26 @@
   /* legacy alias kept so earlier work still resolves */
   --color-emerald: #0e8a72;
 
-  --background: var(--color-ink);
-  --foreground: var(--color-ivory);
+  /* Light theme — warm paper backgrounds, deep ink text. Used for every
+     section except the two dark cinematic bookends (hero, final scene). */
+  --color-paper: #fdf8ec;
+  --color-paper-dim: #f2e6c9;
+  --color-paper-line: #e5d3a8;
+  --color-ink-strong: #1c1208;
+  --color-ink-soft: #6b5a44;
+
+  /* Deep, AA-contrast-safe variants of each accent hue, for text/small
+     labels on paper backgrounds. Bright variants above stay in use for
+     borders, buttons, large gradient display type and dark backgrounds. */
+  --color-saffron-deep: #a85c10;
+  --color-rani-deep: #9c1456;
+  --color-turmeric-deep: #86620f;
+  --color-peacock-deep: #0b5f4d;
+  --color-spice-deep: #9c2318;
+  --color-indigo-deep: #33367a;
+
+  --background: var(--color-paper);
+  --foreground: var(--color-ink-strong);
 }
 
 @theme inline {
@@ -49,6 +67,18 @@
   --color-indigo-soft: var(--color-indigo-soft);
   --color-copper: var(--color-copper);
   --color-emerald: var(--color-emerald);
+
+  --color-paper: var(--color-paper);
+  --color-paper-dim: var(--color-paper-dim);
+  --color-paper-line: var(--color-paper-line);
+  --color-ink-strong: var(--color-ink-strong);
+  --color-ink-soft: var(--color-ink-soft);
+  --color-saffron-deep: var(--color-saffron-deep);
+  --color-rani-deep: var(--color-rani-deep);
+  --color-turmeric-deep: var(--color-turmeric-deep);
+  --color-peacock-deep: var(--color-peacock-deep);
+  --color-spice-deep: var(--color-spice-deep);
+  --color-indigo-deep: var(--color-indigo-deep);
 
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -115,6 +145,15 @@ body {
   color: transparent;
 }
 
+/* Deep-toned gradient text, tuned for readability on paper backgrounds —
+   the bright versions above wash out against white. */
+.text-gradient-deep {
+  background: linear-gradient(90deg, var(--color-saffron-deep) 0%, var(--color-rani-deep) 55%, var(--color-spice-deep) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
 /* ---- vivid section grounds ---- */
 
 .mesh-ink {
@@ -162,6 +201,45 @@ body {
     radial-gradient(ellipse 70% 50% at 15% 90%, rgba(225, 58, 42, 0.35), transparent 55%),
     radial-gradient(ellipse 70% 50% at 85% 90%, rgba(214, 35, 110, 0.3), transparent 55%),
     linear-gradient(180deg, var(--color-ink) 0%, #170f1d 55%, #26130f 100%);
+}
+
+/* ---- light section grounds (the default, everywhere but the two dark
+   cinematic bookends) — warm paper with a whisper of tinted color, not a
+   flat white page. ---- */
+
+.paper {
+  background:
+    radial-gradient(ellipse 70% 50% at 15% 0%, rgba(244, 136, 29, 0.07), transparent 60%),
+    radial-gradient(ellipse 60% 50% at 100% 100%, rgba(214, 35, 110, 0.05), transparent 55%),
+    var(--color-paper);
+}
+
+.paper-deep {
+  background:
+    radial-gradient(ellipse 80% 60% at 90% -10%, rgba(240, 180, 41, 0.1), transparent 55%),
+    radial-gradient(ellipse 70% 50% at 0% 110%, rgba(14, 138, 114, 0.08), transparent 55%),
+    var(--color-paper-dim);
+}
+
+.paper-indigo {
+  background:
+    radial-gradient(ellipse 90% 70% at 85% -10%, rgba(77, 82, 196, 0.14), transparent 60%),
+    radial-gradient(ellipse 80% 60% at 5% 110%, rgba(214, 35, 110, 0.08), transparent 55%),
+    var(--color-paper);
+}
+
+.paper-peacock {
+  background:
+    radial-gradient(ellipse 90% 70% at 80% -10%, rgba(43, 191, 158, 0.14), transparent 60%),
+    radial-gradient(ellipse 80% 60% at 10% 110%, rgba(77, 82, 196, 0.08), transparent 55%),
+    var(--color-paper);
+}
+
+.paper-spice {
+  background:
+    radial-gradient(ellipse 90% 70% at 10% -10%, rgba(225, 58, 42, 0.1), transparent 55%),
+    radial-gradient(ellipse 80% 60% at 100% 110%, rgba(43, 47, 125, 0.08), transparent 55%),
+    var(--color-paper-dim);
 }
 
 .texture-dots {

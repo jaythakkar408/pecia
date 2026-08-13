@@ -1,7 +1,7 @@
 "use client";
 
 import { Reveal } from "@/components/Reveal";
-import { HUE_TEXT, hue } from "@/lib/palette";
+import { HUE_TEXT_DEEP, hue } from "@/lib/palette";
 
 const ENTITIES = [
   "Global Brands", "Indian Entrepreneurs", "Restaurant Owners", "Franchisees",
@@ -11,15 +11,15 @@ const ENTITIES = [
 
 export function Ecosystem() {
   return (
-    <section className="relative mesh-charcoal py-28 sm:py-40">
+    <section className="relative paper-indigo py-28 sm:py-40">
       <div className="mx-auto max-w-4xl px-6 text-center">
         <Reveal>
-          <span className="font-mono-label text-[11px] uppercase tracking-[0.35em] text-turmeric-soft">
+          <span className="font-mono-label text-[11px] uppercase tracking-[0.35em] text-turmeric-deep">
             The Pecia Ecosystem
           </span>
         </Reveal>
         <Reveal delay={0.05}>
-          <h2 className="mt-4 font-display text-3xl font-bold text-ivory sm:text-5xl text-balance">
+          <h2 className="mt-4 font-display text-3xl font-bold text-ink-strong sm:text-5xl text-balance">
             The network grows stronger with every connection.
           </h2>
         </Reveal>
@@ -29,7 +29,7 @@ export function Ecosystem() {
             {ENTITIES.map((entity, i) => (
               <span
                 key={entity}
-                className={`rounded-full border border-ivory/12 bg-ink/50 px-4 py-2 text-sm font-medium transition hover:border-ivory/40 ${hue(HUE_TEXT, i)}`}
+                className={`rounded-full border border-ink-strong/12 bg-white/70 px-4 py-2 text-sm font-medium transition hover:border-ink-strong/35 hover:bg-white ${hue(HUE_TEXT_DEEP, i)}`}
               >
                 {entity}
               </span>
@@ -44,7 +44,7 @@ export function Ecosystem() {
         </Reveal>
 
         <Reveal delay={0.24}>
-          <p className="mt-10 max-w-xl mx-auto text-ivory-dim">
+          <p className="mt-10 max-w-xl mx-auto text-ink-soft">
             Pecia sits at the center — not to control the network, but to
             connect it.
           </p>

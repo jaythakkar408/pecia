@@ -35,15 +35,15 @@ export function IndiaEngine() {
   );
 
   return (
-    <section className="relative mesh-charcoal py-28 sm:py-40">
+    <section className="relative paper-peacock py-28 sm:py-40">
       <div className="mx-auto max-w-4xl px-6">
         <Reveal>
-          <span className="font-mono-label text-[11px] uppercase tracking-[0.35em] text-turmeric-soft">
+          <span className="font-mono-label text-[11px] uppercase tracking-[0.35em] text-turmeric-deep">
             The India Engine
           </span>
         </Reveal>
         <Reveal delay={0.05}>
-          <h2 className="mt-4 max-w-2xl font-display text-3xl font-bold text-ivory sm:text-5xl text-balance">
+          <h2 className="mt-4 max-w-2xl font-display text-3xl font-bold text-ink-strong sm:text-5xl text-balance">
             Food businesses are living systems. Change one variable and the
             whole circulation responds.
           </h2>
@@ -61,8 +61,8 @@ export function IndiaEngine() {
                   </feMerge>
                 </filter>
               </defs>
-              <path d={LOOP_PATH} fill="none" stroke="rgba(251,238,219,0.16)" strokeWidth="1.5" />
-              <circle r="5" fill="#ffd166" filter="url(#engineGlow)">
+              <path d={LOOP_PATH} fill="none" stroke="rgba(28,18,8,0.15)" strokeWidth="1.5" />
+              <circle r="5" fill="#86620f" filter="url(#engineGlow)">
                 <animateMotion dur="10s" repeatCount="indefinite" path={LOOP_PATH} />
               </circle>
               <circle r="3.5" fill="#f4881d" opacity="0.75">
@@ -86,11 +86,11 @@ export function IndiaEngine() {
                   style={{
                     left: `${(p.x / 500) * 100}%`,
                     top: `${(p.y / 390) * 100}%`,
-                    borderColor: isActive ? color : "rgba(251,238,219,0.2)",
+                    borderColor: isActive ? color : "rgba(28,18,8,0.18)",
                     color: isActive ? color : undefined,
                     boxShadow: isActive ? `0 0 18px ${color}55` : "none",
                   }}
-                  className="absolute -translate-x-1/2 -translate-y-1/2 whitespace-nowrap rounded-full border bg-ink/70 px-3 py-1.5 font-mono-label text-[10px] uppercase tracking-[0.1em] text-ivory transition sm:px-4 sm:py-2 sm:text-xs"
+                  className="absolute -translate-x-1/2 -translate-y-1/2 whitespace-nowrap rounded-full border bg-white/70 px-3 py-1.5 font-mono-label text-[10px] uppercase tracking-[0.1em] text-ink-strong transition sm:px-4 sm:py-2 sm:text-xs"
                 >
                   {node}
                 </button>
@@ -100,7 +100,7 @@ export function IndiaEngine() {
         </Reveal>
 
         <Reveal delay={0.15}>
-          <p className="mx-auto mt-8 max-w-md text-center text-sm text-ivory-dim">
+          <p className="mx-auto mt-8 max-w-md text-center text-sm text-ink-soft">
             {active !== null
               ? `Shift ${NODES[active]}, and pricing, operations, unit economics and brand value all move with it.`
               : "Hover a variable to see how it ripples through the rest of the engine."}
@@ -108,7 +108,7 @@ export function IndiaEngine() {
         </Reveal>
 
         <Reveal delay={0.2}>
-          <p className="mt-10 text-center font-display text-2xl font-bold text-turmeric-soft sm:text-3xl">
+          <p className="mt-10 text-center font-display text-2xl font-bold text-turmeric-deep sm:text-3xl">
             Pecia understands the system.
           </p>
         </Reveal>
