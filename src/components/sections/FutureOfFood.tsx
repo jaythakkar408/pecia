@@ -12,7 +12,7 @@ const VISION_2035 = [
 
 export function FutureOfFood() {
   return (
-    <section className="relative paper-deep py-28 sm:py-40">
+    <section className="relative paper py-28 sm:py-40">
       <div className="mx-auto max-w-3xl px-6 text-center">
         <Reveal>
           <span className="font-mono-label text-[11px] uppercase tracking-[0.35em] text-turmeric-deep">

@@ -16,7 +16,7 @@ const POSSIBILITIES = [
 
 export function WhatIf() {
   return (
-    <section className="relative paper-spice py-28 sm:py-40">
+    <section className="relative paper-peacock py-28 sm:py-40">
       <div className="mx-auto max-w-3xl px-6 text-center">
         <Reveal>
           <h2 className="font-display text-3xl font-bold text-ink-strong sm:text-5xl text-balance">

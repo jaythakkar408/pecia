@@ -40,22 +40,30 @@ export function SoundProvider({ children }: { children: React.ReactNode }) {
       if (muted) return;
       const ctx = ensureCtx();
       if (!ctx) return;
-      if (ctx.state === "suspended") ctx.resume();
 
-      const osc = ctx.createOscillator();
-      const gain = ctx.createGain();
-      osc.type = type;
-      osc.frequency.value = frequency;
+      const play = () => {
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = type;
+        osc.frequency.value = frequency;
 
-      const now = ctx.currentTime;
-      gain.gain.setValueAtTime(0, now);
-      gain.gain.linearRampToValueAtTime(0.12, now + 0.02);
-      gain.gain.exponentialRampToValueAtTime(0.0001, now + duration);
+        const now = ctx.currentTime;
+        gain.gain.setValueAtTime(0, now);
+        gain.gain.linearRampToValueAtTime(0.12, now + 0.02);
+        gain.gain.exponentialRampToValueAtTime(0.0001, now + duration);
 
-      osc.connect(gain);
-      gain.connect(ctx.destination);
-      osc.start(now);
-      osc.stop(now + duration + 0.05);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start(now);
+        osc.stop(now + duration + 0.05);
+      };
+
+      // Scheduling immediately while the context is still suspended silently
+      // drops the note — resume() is async, so wait for it before playing
+      // rather than racing it. This is what made the very first sound after
+      // a page load or tab-switch unreliable, especially on mobile.
+      if (ctx.state === "running") play();
+      else ctx.resume().then(play).catch(() => {});
     },
     [muted, ensureCtx]
   );
@@ -69,24 +77,28 @@ export function SoundProvider({ children }: { children: React.ReactNode }) {
     if (muted) return;
     const ctx = ensureCtx();
     if (!ctx) return;
-    if (ctx.state === "suspended") ctx.resume();
 
-    const thump = (delay: number, freq: number, peak: number) => {
-      const osc = ctx.createOscillator();
-      const gain = ctx.createGain();
-      osc.type = "sine";
-      osc.frequency.value = freq;
-      const start = ctx.currentTime + delay;
-      gain.gain.setValueAtTime(0, start);
-      gain.gain.linearRampToValueAtTime(peak, start + 0.03);
-      gain.gain.exponentialRampToValueAtTime(0.0001, start + 0.32);
-      osc.connect(gain);
-      gain.connect(ctx.destination);
-      osc.start(start);
-      osc.stop(start + 0.35);
+    const play = () => {
+      const thump = (delay: number, freq: number, peak: number) => {
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = "sine";
+        osc.frequency.value = freq;
+        const start = ctx.currentTime + delay;
+        gain.gain.setValueAtTime(0, start);
+        gain.gain.linearRampToValueAtTime(peak, start + 0.03);
+        gain.gain.exponentialRampToValueAtTime(0.0001, start + 0.32);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start(start);
+        osc.stop(start + 0.35);
+      };
+      thump(0, 58, 0.09);
+      thump(0.18, 46, 0.06);
     };
-    thump(0, 58, 0.09);
-    thump(0.18, 46, 0.06);
+
+    if (ctx.state === "running") play();
+    else ctx.resume().then(play).catch(() => {});
   }, [muted, ensureCtx]);
 
   const toggleMuted = useCallback(() => {
@@ -114,11 +126,13 @@ export function SoundProvider({ children }: { children: React.ReactNode }) {
     const unlock = () => {
       const ctx = ensureCtx();
       if (ctx && ctx.state === "suspended") ctx.resume();
-      events.forEach((event) => window.removeEventListener(event, unlock));
+      events.forEach((event) => window.removeEventListener(event, unlock, true));
     };
-    events.forEach((event) => window.addEventListener(event, unlock, { passive: true }));
+    events.forEach((event) =>
+      window.addEventListener(event, unlock, { passive: true, capture: true })
+    );
     return () => {
-      events.forEach((event) => window.removeEventListener(event, unlock));
+      events.forEach((event) => window.removeEventListener(event, unlock, true));
     };
   }, [ensureCtx]);
 

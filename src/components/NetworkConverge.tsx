@@ -29,6 +29,12 @@ function samplePointsFromText(
   height: number,
   fontSize: number
 ) {
+  // The container can briefly report zero size on mount (mobile viewport
+  // units settling, fonts still loading) — getImageData throws on a
+  // zero-dimension canvas, so bail out rather than crash; a resize once
+  // the container has real dimensions will resample correctly.
+  if (width <= 0 || height <= 0) return [] as { x: number; y: number }[];
+
   const off = document.createElement("canvas");
   off.width = width;
   off.height = height;
@@ -116,6 +122,11 @@ export function NetworkConverge({
     };
     init();
     window.addEventListener("resize", init);
+    // Covers the case above: if the container was zero-sized on mount,
+    // this fires as soon as it settles into its real dimensions, even
+    // without a window resize event.
+    const resizeObserver = new ResizeObserver(() => init());
+    resizeObserver.observe(container);
 
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -183,6 +194,7 @@ export function NetworkConverge({
 
     return () => {
       window.removeEventListener("resize", init);
+      resizeObserver.disconnect();
       observer.disconnect();
       if (rafRef.current) cancelAnimationFrame(rafRef.current);
     };

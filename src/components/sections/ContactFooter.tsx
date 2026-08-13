@@ -14,7 +14,7 @@ const CONTEXTUAL_CTAS = [
 
 export function ContactFooter() {
   return (
-    <section id="contact" className="relative paper-deep py-28 sm:py-40">
+    <section id="contact" className="relative paper-indigo py-28 sm:py-40">
       <div className="mx-auto max-w-5xl px-6">
         <Reveal>
           <h2 className="max-w-2xl font-display text-3xl font-bold text-ink-strong sm:text-5xl text-balance">

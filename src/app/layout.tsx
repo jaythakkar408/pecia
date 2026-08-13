@@ -3,6 +3,7 @@ import { Unbounded, Manrope, Space_Mono } from "next/font/google";
 import { SoundProvider } from "@/components/SoundProvider";
 import { Nav } from "@/components/Nav";
 import { EmberField } from "@/components/EmberField";
+import { EraSpine } from "@/components/EraSpine";
 import "./globals.css";
 
 const unbounded = Unbounded({
@@ -50,9 +51,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="en"
       className={`${unbounded.variable} ${manrope.variable} ${spaceMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-ink text-ivory">
-        <div className="grain" aria-hidden="true" />
+      <body className="min-h-full flex flex-col bg-paper text-ink-strong">
         <EmberField />
+        <EraSpine />
         <SoundProvider>
           <Nav />
           {children}

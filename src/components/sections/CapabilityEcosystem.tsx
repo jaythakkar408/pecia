@@ -3,7 +3,7 @@
 import { useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import { Reveal } from "@/components/Reveal";
-import { HUE_BG_SOFT, HUE_BORDER, HUE_TEXT_DEEP, hue } from "@/lib/palette";
+import { HUE_BG_SOFT, HUE_BG_SOLID, HUE_BORDER, HUE_TEXT_DEEP, hue } from "@/lib/palette";
 
 const HEX = ["#f4881d", "#d6236e", "#f0b429", "#0e8a72", "#e13a2a", "#4d52c4"];
 
@@ -100,6 +100,7 @@ export function CapabilityEcosystem() {
               PECIA
             </button>
 
+            {/* Desktop/tablet: full labels on the wheel itself. */}
             {CAPABILITIES.map((cap, i) => (
               <button
                 key={cap.label}
@@ -108,7 +109,7 @@ export function CapabilityEcosystem() {
                   left: `${positions[i].x}%`,
                   top: `${positions[i].y}%`,
                 }}
-                className={`absolute -translate-x-1/2 -translate-y-1/2 rounded-full border px-2.5 py-1.5 font-mono-label text-[9px] uppercase tracking-[0.12em] transition sm:px-3 sm:py-2 sm:text-[10px] ${
+                className={`absolute hidden -translate-x-1/2 -translate-y-1/2 rounded-full border px-3 py-2 font-mono-label text-[10px] uppercase tracking-[0.12em] transition sm:inline-block ${
                   i === active
                     ? `${hue(HUE_BORDER, i)} ${hue(HUE_BG_SOFT, i)} ${hue(HUE_TEXT_DEEP, i)} border-opacity-100`
                     : "border-ink-strong/15 bg-white/70 text-ink-soft hover:border-ink-strong/35"
@@ -116,6 +117,24 @@ export function CapabilityEcosystem() {
               >
                 {cap.label}
               </button>
+            ))}
+
+            {/* Mobile: the wheel shows only tap-target dots — 12 full labels
+                packed onto a ~340px circle collide, so labels move to a
+                normal-flow list below instead of overlapping on the ring. */}
+            {CAPABILITIES.map((cap, i) => (
+              <button
+                key={`dot-${cap.label}`}
+                onClick={() => setActive(i)}
+                aria-label={cap.label}
+                style={{
+                  left: `${positions[i].x}%`,
+                  top: `${positions[i].y}%`,
+                }}
+                className={`absolute h-4 w-4 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 transition sm:hidden ${
+                  i === active ? `${hue(HUE_BG_SOLID, i)} border-white shadow-sm` : "border-ink-strong/20 bg-white"
+                }`}
+              />
             ))}
           </div>
         </Reveal>
@@ -128,6 +147,24 @@ export function CapabilityEcosystem() {
             <p className="mt-2 text-sm text-ink-soft">
               {CAPABILITIES[active].note}
             </p>
+          </div>
+        </Reveal>
+
+        <Reveal delay={0.18}>
+          <div className="mx-auto mt-8 flex max-w-lg flex-wrap justify-center gap-2 sm:hidden">
+            {CAPABILITIES.map((cap, i) => (
+              <button
+                key={`tag-${cap.label}`}
+                onClick={() => setActive(i)}
+                className={`rounded-full border px-3 py-1.5 font-mono-label text-[10px] uppercase tracking-[0.12em] transition ${
+                  i === active
+                    ? `${hue(HUE_BORDER, i)} ${hue(HUE_BG_SOFT, i)} ${hue(HUE_TEXT_DEEP, i)}`
+                    : "border-ink-strong/15 bg-white/70 text-ink-soft"
+                }`}
+              >
+                {cap.label}
+              </button>
+            ))}
           </div>
         </Reveal>
       </div>

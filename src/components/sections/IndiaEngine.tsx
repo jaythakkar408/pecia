@@ -73,6 +73,7 @@ export function IndiaEngine() {
               </circle>
             </svg>
 
+            {/* Desktop/tablet: full labels ringing the loop. */}
             {NODES.map((node, i) => {
               const p = points[i];
               const color = HEX[i % HEX.length];
@@ -83,6 +84,7 @@ export function IndiaEngine() {
                   onMouseEnter={() => setActive(i)}
                   onFocus={() => setActive(i)}
                   onMouseLeave={() => setActive(null)}
+                  onClick={() => setActive(i)}
                   style={{
                     left: `${(p.x / 500) * 100}%`,
                     top: `${(p.y / 390) * 100}%`,
@@ -90,10 +92,34 @@ export function IndiaEngine() {
                     color: isActive ? color : undefined,
                     boxShadow: isActive ? `0 0 18px ${color}55` : "none",
                   }}
-                  className="absolute -translate-x-1/2 -translate-y-1/2 whitespace-nowrap rounded-full border bg-white/70 px-3 py-1.5 font-mono-label text-[10px] uppercase tracking-[0.1em] text-ink-strong transition sm:px-4 sm:py-2 sm:text-xs"
+                  className="absolute hidden -translate-x-1/2 -translate-y-1/2 whitespace-nowrap rounded-full border bg-white/70 px-4 py-2 font-mono-label text-xs uppercase tracking-[0.1em] text-ink-strong transition sm:inline-block"
                 >
                   {node}
                 </button>
+              );
+            })}
+
+            {/* Mobile: 11 full-width labels crowd the loop and clip past the
+                viewport edge (measured — "Unit Economics" landed at x:-17px),
+                so the loop shows tap-target dots only; labels move to a
+                normal-flow list below. */}
+            {NODES.map((node, i) => {
+              const p = points[i];
+              const isActive = active === i;
+              return (
+                <button
+                  key={`dot-${node}`}
+                  onClick={() => setActive(i)}
+                  aria-label={node}
+                  style={{
+                    left: `${(p.x / 500) * 100}%`,
+                    top: `${(p.y / 390) * 100}%`,
+                    background: isActive ? HEX[i % HEX.length] : undefined,
+                  }}
+                  className={`absolute h-4 w-4 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 transition sm:hidden ${
+                    isActive ? "border-white shadow-sm" : "border-ink-strong/20 bg-white"
+                  }`}
+                />
               );
             })}
           </div>
@@ -103,8 +129,32 @@ export function IndiaEngine() {
           <p className="mx-auto mt-8 max-w-md text-center text-sm text-ink-soft">
             {active !== null
               ? `Shift ${NODES[active]}, and pricing, operations, unit economics and brand value all move with it.`
-              : "Hover a variable to see how it ripples through the rest of the engine."}
+              : "Hover or tap a variable to see how it ripples through the rest of the engine."}
           </p>
+        </Reveal>
+
+        <Reveal delay={0.18}>
+          <div className="mx-auto mt-6 flex max-w-md flex-wrap justify-center gap-2 sm:hidden">
+            {NODES.map((node, i) => {
+              const isActive = active === i;
+              const color = HEX[i % HEX.length];
+              return (
+                <button
+                  key={`tag-${node}`}
+                  onClick={() => setActive(i)}
+                  style={{
+                    borderColor: isActive ? color : undefined,
+                    color: isActive ? color : undefined,
+                  }}
+                  className={`rounded-full border px-3 py-1.5 font-mono-label text-[10px] uppercase tracking-[0.1em] transition ${
+                    isActive ? "bg-white" : "border-ink-strong/15 bg-white/70 text-ink-soft"
+                  }`}
+                >
+                  {node}
+                </button>
+              );
+            })}
+          </div>
         </Reveal>
 
         <Reveal delay={0.2}>

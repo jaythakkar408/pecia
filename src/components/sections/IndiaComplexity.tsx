@@ -115,7 +115,7 @@ export function IndiaComplexity() {
   const [active, setActive] = useState<Region>(REGIONS[0]);
 
   return (
-    <section className="relative paper-indigo py-28 sm:py-40">
+    <section className="relative paper-deep py-28 sm:py-40">
       <div className="mx-auto max-w-6xl px-6">
         <Reveal>
           <span className="font-mono-label text-[11px] uppercase tracking-[0.35em] text-turmeric-deep">
